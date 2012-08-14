@@ -1,0 +1,44 @@
+<idea-plugin version="2">
+  <id>com.paperetto.dash</id>
+  <name>Dash Launcher</name>
+  <version>1.0</version>
+  <vendor email="dash-plugin@paperetto.com" url="http://www.linkedin.com/in/combinatorial">David Brittain</vendor>
+
+  <description><![CDATA[
+      Launches Dash with the word under the caret or the selected text<br>
+      Dash is a Mac OSX utility that can be obtained from the <a href="http://itunes.apple.com/us/app/dash/id458034879?ls=1&mt=12">Apple Store</a>
+      ]]></description>
+
+  <change-notes><![CDATA[
+      Initial release<br>
+      ]]>
+  </change-notes>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="107.105"/>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.lang</depends>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+      <action id="DashLauncherAction" class="com.paperetto.dash.DashLauncherAction" text="Search in Dash"
+              description="Searches word under caret in Google">
+          <add-to-group group-id="ToolsMenu" anchor="last"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
+      </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+</idea-plugin>
