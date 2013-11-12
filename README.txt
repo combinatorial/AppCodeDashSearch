@@ -1,5 +1,7 @@
 A simple plugin for AppCode (and other IntelliJ based IDEs) that provides keyboard shortcut access to Dash. This is necessary as the 'Services' menu is not populated in AppCode (apparently a Java limitation).
 
+Download Dash.jar from here: https://github.com/combinatorial/AppCodeDashSearch/releases/download/1.0/Dash.jar
+
 Install Dash.jar in this folder as a plugin.
 
 Dash is a Mac application for rapid search of developer documentation. It is free with nags to persuade you to pay and lose the nags. The free version is fully functional and super-useful. Get karma for buying and supporting the developer :) It can be downloaded here: 
