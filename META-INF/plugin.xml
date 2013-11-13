@@ -1,17 +1,34 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
-  <name>Dash Launcher</name>
-  <version>1.0</version>
-  <vendor email="dash-plugin@paperetto.com" url="http://www.linkedin.com/in/combinatorial">David Brittain</vendor>
+  <name>Dash</name>
+  <version>2.0</version>
+  <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
-      Launches Dash with the word under the caret or the selected text<br>
-      Dash is a Mac OSX utility that can be obtained from the <a href="http://itunes.apple.com/us/app/dash/id458034879?ls=1&mt=12">Apple Store</a>
-      ]]></description>
+Launches Dash with the word under the caret or the selected text.<br />
+The default shortcut assigned in the plugin is Mac-Shift-D.<br />
+<br />
+Dash is a Mac OSX utility that can be obtained from the <a href="https://itunes.apple.com/us/app/dash/id458034879">Apple Store</a>.<br />
+<br />
+The plugin will use the documents file type to determine which docset keyword to use in Dash.<br />
+These associations are customizable in "~/Library/Preferences/%IDE_NAME%/options/options.xml" under the property "DASH_PLUGIN_KEYWORDS"<br />
+%IDE_NAME% might be "WebIde60" or "IdeaIC12"<br />
+<br />
+Values pairs can be provided in a semi-colon delimited list. The value pair consists of FILE_TYPE=KEYWORD<br />
+File type names can be found in the IDE settings. Instead of file types file extensions can be used. The file extension has to start with a dot.<br />
+<pre>
+ ex: HTML=html;.xhtml=html
+      |           |
+      |          Uses Dash keyword "html" for files with .xhtml extension (extensions have priority over file types)
+     Uses Dash keyword "html" for files of type HTML
+</pre>
+<br />
+Initially developed by <a href="http://www.linkedin.com/in/combinatorial">David Brittain</a>
+    ]]></description>
 
   <change-notes><![CDATA[
-      Initial release<br>
-      ]]>
+2.0 Added Dash docset keyword support<br />
+]]>
   </change-notes>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
@@ -32,7 +49,7 @@
   <actions>
     <!-- Add your actions here -->
       <action id="DashLauncherAction" class="com.paperetto.dash.DashLauncherAction" text="Search in Dash"
-              description="Searches word under caret in Google">
+              description="Searches word under caret in Dash">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
       </action>
