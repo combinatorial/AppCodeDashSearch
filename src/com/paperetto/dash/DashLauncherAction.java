@@ -10,11 +10,20 @@ import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.vfs.VirtualFile;
+import de.dreamlab.dash.KeywordLookup;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class DashLauncherAction extends AnAction {
+    private KeywordLookup keywordLookup;
+
+    public DashLauncherAction()
+    {
+        keywordLookup = new KeywordLookup();
+    }
+
 
     @Override
     public void update(AnActionEvent e) {
@@ -68,7 +77,15 @@ public class DashLauncherAction extends AnAction {
         }
 
         if(word!=null) {
+            // keyword
+            VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+            String keyword = null;
 
+            if ( virtualFile != null) {
+                 keyword = keywordLookup.findKeyword(virtualFile.getFileType().getName(), virtualFile.getExtension());
+            }
+
+            // search word
             String searchWord;
             try {
                 searchWord = URLEncoder.encode(word, "UTF-8");
@@ -79,7 +96,13 @@ public class DashLauncherAction extends AnAction {
             //URLEncoder turns spaces in to '+' we need them to be %20
             searchWord = searchWord.replace("+", "%20");
 
-            String request = "dash://" + searchWord;
+            String request = "dash://";
+
+            if ( keyword != null ) {
+                request += keyword + ":";
+            }
+
+            request += searchWord;
 
             //now open the URL with the 'open' command
             String[] command = new String[]{ExecUtil.getOpenCommandPath()};
