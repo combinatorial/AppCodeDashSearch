@@ -10,6 +10,7 @@ import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.vfs.VirtualFile;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -68,7 +69,23 @@ public class DashLauncherAction extends AnAction {
         }
 
         if(word!=null) {
+            // file extension
+            VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+            String fileExtension = virtualFile != null ? virtualFile.getExtension() : null;
 
+            if ( fileExtension != null ) {
+                try {
+                    fileExtension = URLEncoder.encode(fileExtension, "UTF-8");
+                } catch (UnsupportedEncodingException el){
+                    ///where do I print an error
+                    return;
+                }
+
+                fileExtension = fileExtension.replace("+", "%20");
+            }
+
+
+            // search word
             String searchWord;
             try {
                 searchWord = URLEncoder.encode(word, "UTF-8");
@@ -79,7 +96,13 @@ public class DashLauncherAction extends AnAction {
             //URLEncoder turns spaces in to '+' we need them to be %20
             searchWord = searchWord.replace("+", "%20");
 
-            String request = "dash://" + searchWord;
+            String request = "dash://";
+
+            if ( fileExtension != null ) {
+                request += "." + fileExtension + ":";
+            }
+
+            request += searchWord;
 
             //now open the URL with the 'open' command
             String[] command = new String[]{ExecUtil.getOpenCommandPath()};
