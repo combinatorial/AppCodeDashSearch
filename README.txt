@@ -4,7 +4,7 @@ Download Dash.jar from here: https://github.com/gdelmas/IntelliJDashPlugin/relea
 Install Dash.jar as a plugin.
 
 Dash is a Mac application for rapid search of developer documentation. It is free with nags to persuade you to pay and lose the nags. The free version is fully functional and super-useful. Get karma for buying and supporting the developer :) It can be downloaded here:
-http://itunes.apple.com/us/app/dash/id458034879?ls=1&mt=12
+http://kapeli.com/dash
 
 
 The default shortcut assigned in the plugin is Mac-Shift-D. It either uses the current selection for the search, or the caret position.
