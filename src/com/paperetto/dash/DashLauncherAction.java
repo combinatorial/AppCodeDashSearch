@@ -34,25 +34,29 @@ public class DashLauncherAction extends AnAction {
 
 
     private String getWordAtCursor(CharSequence editorText, int cursorOffset) {
-        if(editorText.length() == 0) return null;
-        if(cursorOffset > 0 && !isIdentifierPart(editorText.charAt(cursorOffset)) &&
-                isIdentifierPart(editorText.charAt(cursorOffset - 1))) {
+        int editorTextLength = editorText.length();
+
+        if ( editorTextLength == 0 ) {
+            return null;
+        }
+
+        if ( (cursorOffset >= editorTextLength) || (cursorOffset > 1 && !isIdentifierPart(editorText.charAt(cursorOffset) ) && isIdentifierPart(editorText.charAt(cursorOffset - 1))) ) {
             cursorOffset--;
         }
 
-        if(isIdentifierPart(editorText.charAt(cursorOffset))) {
+        if ( isIdentifierPart(editorText.charAt(cursorOffset)) ) {
             int start = cursorOffset;
             int end = cursorOffset;
 
-            while(start > 0 && isIdentifierPart(editorText.charAt(start-1))) {
+            while ( start > 0 && isIdentifierPart(editorText.charAt(start-1)) ) {
                 start--;
             }
 
-            while(end < editorText.length() && isIdentifierPart(editorText.charAt(end))) {
+            while ( end < editorTextLength && isIdentifierPart(editorText.charAt(end)) ) {
                 end++;
             }
 
-            return editorText.subSequence(start,end).toString();
+            return editorText.subSequence(start, end).toString();
         }
         return null;
     }

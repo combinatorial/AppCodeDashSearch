@@ -27,7 +27,7 @@ Initially developed by <a href="http://www.linkedin.com/in/combinatorial">David 
     ]]></description>
 
   <change-notes><![CDATA[
-2.1 Added Ruby syntax support<br />
+2.1 Added Ruby syntax support, stability fixes<br />
 2.0 Added Dash docset keyword support<br />
 ]]>
   </change-notes>
