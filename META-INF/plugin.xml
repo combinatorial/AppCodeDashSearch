@@ -8,7 +8,7 @@
 Launches Dash with the word under the caret or the selected text.<br />
 The default shortcut assigned in the plugin is Mac-Shift-D.<br />
 <br />
-Dash is a Mac OSX utility that can be obtained from the <a href="https://itunes.apple.com/us/app/dash/id458034879">Apple Store</a>.<br />
+Dash is a Mac OSX utility that can be obtained <a href="http://kapeli.com/dash">here</a>.<br />
 <br />
 The plugin will use the documents file type to determine which docset keyword to use in Dash.<br />
 These associations are customizable in "~/Library/Preferences/%IDE_NAME%/options/options.xml" under the property "DASH_PLUGIN_KEYWORDS"<br />
