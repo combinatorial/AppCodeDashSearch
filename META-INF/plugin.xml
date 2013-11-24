@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>2.0</version>
+  <version>2.1</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -27,6 +27,7 @@ Initially developed by <a href="http://www.linkedin.com/in/combinatorial">David 
     ]]></description>
 
   <change-notes><![CDATA[
+2.1 Added Ruby syntax support<br />
 2.0 Added Dash docset keyword support<br />
 ]]>
   </change-notes>

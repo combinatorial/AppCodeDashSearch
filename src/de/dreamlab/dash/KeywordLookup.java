@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class KeywordLookup {
     private static String CONFIG_KEYWORDS = "DASH_PLUGIN_KEYWORDS";
-    private static String DEFAULT_KEYWORDS = "ActionScript=actionscript;C++=cpp;CoffeeScriptcoffee;Perl=perl;CSS=css;Erlang=erlang;Haskell=haskell;HTML=html;JAVA=java;CLASS=java;JavaScript=javascript;LESS=less;PHP=php;SASS=sass";
+    private static String DEFAULT_KEYWORDS = "ActionScript=actionscript;C++=cpp;CoffeeScriptcoffee;Perl=perl;CSS=css;Erlang=erlang;Haskell=haskell;HTML=html;JAVA=java;CLASS=java;JavaScript=javascript;LESS=less;PHP=php;SASS=sass;Ruby=ruby";
 
     private HashMap<String, String> typeMap;
     private HashMap<String, String> extensionMap;
@@ -66,7 +66,7 @@ public class KeywordLookup {
         }
     }
 
-    private String cleanType(String type)
+    public String cleanType(String type)
     {
         type = type.replaceFirst("\\(.*\\)", "");
         type = type.replace("files", "");

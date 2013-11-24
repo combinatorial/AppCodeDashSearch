@@ -18,6 +18,7 @@ import java.net.URLEncoder;
 
 public class DashLauncherAction extends AnAction {
     private KeywordLookup keywordLookup;
+    private String fileType = null;
 
     public DashLauncherAction()
     {
@@ -34,20 +35,20 @@ public class DashLauncherAction extends AnAction {
 
     private String getWordAtCursor(CharSequence editorText, int cursorOffset) {
         if(editorText.length() == 0) return null;
-        if(cursorOffset > 0 && !Character.isJavaIdentifierPart(editorText.charAt(cursorOffset)) &&
-                Character.isJavaIdentifierPart(editorText.charAt(cursorOffset - 1))) {
+        if(cursorOffset > 0 && !isIdentifierPart(editorText.charAt(cursorOffset)) &&
+                isIdentifierPart(editorText.charAt(cursorOffset - 1))) {
             cursorOffset--;
         }
 
-        if(Character.isJavaIdentifierPart(editorText.charAt(cursorOffset))) {
+        if(isIdentifierPart(editorText.charAt(cursorOffset))) {
             int start = cursorOffset;
             int end = cursorOffset;
 
-            while(start > 0 && Character.isJavaIdentifierPart(editorText.charAt(start-1))) {
+            while(start > 0 && isIdentifierPart(editorText.charAt(start-1))) {
                 start--;
             }
 
-            while(end < editorText.length() && Character.isJavaIdentifierPart(editorText.charAt(end))) {
+            while(end < editorText.length() && isIdentifierPart(editorText.charAt(end))) {
                 end++;
             }
 
@@ -57,6 +58,15 @@ public class DashLauncherAction extends AnAction {
     }
 
     public void actionPerformed(AnActionEvent e) {
+        VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+
+        if ( virtualFile != null ) {
+            fileType = keywordLookup.cleanType(virtualFile.getFileType().getName());
+        }
+        else {
+            fileType = null;
+        }
+
 
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
 
@@ -78,11 +88,10 @@ public class DashLauncherAction extends AnAction {
 
         if(word!=null) {
             // keyword
-            VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
             String keyword = null;
 
             if ( virtualFile != null) {
-                 keyword = keywordLookup.findKeyword(virtualFile.getFileType().getName(), virtualFile.getExtension());
+                keyword = keywordLookup.findKeyword(virtualFile.getFileType().getName(), virtualFile.getExtension());
             }
 
             // search word
@@ -116,6 +125,15 @@ public class DashLauncherAction extends AnAction {
                 ///where do I print an error
                 return;
             }
+        }
+    }
+
+    private boolean isIdentifierPart(char ch) {
+        if ( fileType.equalsIgnoreCase("Ruby") ) {
+            return Character.isJavaIdentifierPart(ch) || ch == '?';
+        }
+        else {
+            return Character.isJavaIdentifierPart(ch);
         }
     }
 }
