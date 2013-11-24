@@ -1,6 +1,6 @@
 A simple plugin for the IntelliJ Platform (IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, Android Studio and AppCode) that provides keyboard shortcut access to Dash. This is necessary as the 'Services' menu is not populated in IntelliJ (apparently a Java limitation).
 
-Download Dash.jar from here: https://github.com/gdelmas/IntelliJDashPlugin/releases/download/2.0/Dash.jar
+Download Dash.jar from here: https://github.com/gdelmas/IntelliJDashPlugin/releases
 Install Dash.jar as a plugin.
 
 Dash is a Mac application for rapid search of developer documentation. It is free with nags to persuade you to pay and lose the nags. The free version is fully functional and super-useful. Get karma for buying and supporting the developer :) It can be downloaded here:
