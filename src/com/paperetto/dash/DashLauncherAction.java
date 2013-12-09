@@ -6,7 +6,6 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
@@ -17,8 +16,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class DashLauncherAction extends AnAction {
+
+	private final static String RUBY_FILE_IDENTIFIER = "Ruby";
+
     private KeywordLookup keywordLookup;
-    private String fileType = null;
+    private String fileType;
 
     public DashLauncherAction()
     {
@@ -63,14 +65,9 @@ public class DashLauncherAction extends AnAction {
 
     public void actionPerformed(AnActionEvent e) {
         VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-
-        if ( virtualFile != null ) {
-            fileType = keywordLookup.cleanType(virtualFile.getFileType().getName());
-        }
-        else {
-            fileType = null;
-        }
-
+		if (virtualFile != null) {
+			fileType = keywordLookup.cleanType(virtualFile.getFileType().getName());
+		}
 
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
 
@@ -94,7 +91,7 @@ public class DashLauncherAction extends AnAction {
             // keyword
             String keyword = null;
 
-            if ( virtualFile != null) {
+            if (virtualFile != null) {
                 keyword = keywordLookup.findKeyword(virtualFile.getFileType().getName(), virtualFile.getExtension());
             }
 
@@ -133,11 +130,7 @@ public class DashLauncherAction extends AnAction {
     }
 
     private boolean isIdentifierPart(char ch) {
-        if ( fileType.equalsIgnoreCase("Ruby") ) {
-            return Character.isJavaIdentifierPart(ch) || ch == '?';
-        }
-        else {
-            return Character.isJavaIdentifierPart(ch);
-        }
+		return Character.isJavaIdentifierPart(ch) ||
+				(RUBY_FILE_IDENTIFIER.equalsIgnoreCase(fileType) && ch == '?');
     }
 }
