@@ -54,12 +54,9 @@ public class KeywordLookup {
 
         if ( !propertiesComponent.isValueSet(CONFIG_KEYWORDS) ) {
             // If it's Android Studio, use the Android docset instead of Java's.
-            if (ANDROID_STUDIO_PRODUCT_CODE.equals(
-                ApplicationInfo.getInstance().getBuild().getProductCode())) {
-
-                    // Really revolting hack but it gets the job done.
-                    propertiesComponent.setValue(CONFIG_KEYWORDS,
-                        DEFAULT_KEYWORDS.replace("JAVA=java;", "JAVA=android;"));
+            if (ANDROID_STUDIO_PRODUCT_CODE.equals(ApplicationInfo.getInstance().getBuild().getProductCode())) {
+                // Really revolting hack but it gets the job done.
+                propertiesComponent.setValue(CONFIG_KEYWORDS, DEFAULT_KEYWORDS.replace("JAVA=java7;", "JAVA=android;"));
             } else {
                 propertiesComponent.setValue(CONFIG_KEYWORDS, DEFAULT_KEYWORDS);
             }
