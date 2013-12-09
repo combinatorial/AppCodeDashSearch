@@ -65,9 +65,14 @@ public class DashLauncherAction extends AnAction {
 
     public void actionPerformed(AnActionEvent e) {
         VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+
 		if (virtualFile != null) {
 			fileType = keywordLookup.cleanType(virtualFile.getFileType().getName());
 		}
+        else {
+            fileType = null;
+        }
+
 
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
 
@@ -130,7 +135,11 @@ public class DashLauncherAction extends AnAction {
     }
 
     private boolean isIdentifierPart(char ch) {
-		return Character.isJavaIdentifierPart(ch) ||
-				(RUBY_FILE_IDENTIFIER.equalsIgnoreCase(fileType) && ch == '?');
+        if ( RUBY_FILE_IDENTIFIER.equalsIgnoreCase(fileType) ) {
+            return Character.isJavaIdentifierPart(ch) || ch == '?';
+        }
+        else {
+            return Character.isJavaIdentifierPart(ch);
+        }
     }
 }
