@@ -26,5 +26,7 @@ File type names can be found in the IDE settings. Instead of file types file ext
       |          priority over file types)
      Uses Dash keyword "html" for files of type HTML
 
+## Troubleshooting
+######The installation from the repositories does not work
+It looks like there is an IntelliJ/Java bug with OS X Mavericks which prevents to install plugins from the repositories. Please install the plugin manually from [here](https://github.com/gdelmas/IntelliJDashPlugin/releases). For additional information check [issue #13](https://github.com/gdelmas/IntelliJDashPlugin/issues/13).
 
-Please feel free to request improvements, or fork-it and make them yourself!
