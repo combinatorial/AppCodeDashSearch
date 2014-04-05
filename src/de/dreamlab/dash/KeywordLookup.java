@@ -1,84 +1,105 @@
 package de.dreamlab.dash;
 
-import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.lang.Language;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationInfo;
+import com.intellij.openapi.ui.Messages;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class KeywordLookup {
-    private static String CONFIG_KEYWORDS = "DASH_PLUGIN_KEYWORDS";
-    private static String DEFAULT_KEYWORDS = "ActionScript=actionscript;C++=cpp;CoffeeScript=coffee;Perl=perl;CSS=css;Erlang=erlang;Haskell=haskell;HTML=html;JAVA=java7;CLASS=java7;JavaScript=javascript;LESS=less;PHP=php;SASS=sass;Ruby=ruby";
     private static final String ANDROID_STUDIO_PRODUCT_CODE = "AI";
 
-    private HashMap<String, String> typeMap;
-    private HashMap<String, String> extensionMap;
+    private HashMap<String, List<String>> languageMap;
 
     public KeywordLookup()
     {
-        initDefaults();
+        languageMap = new HashMap<String, List<String>>();
 
-        extensionMap = new HashMap<String, String>();
-        typeMap = new HashMap<String, String>();
+        // IntelliJ
+        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing");
 
-        String[] associations = PropertiesComponent.getInstance().getValue(CONFIG_KEYWORDS).split(";");
-        for ( String association : associations ) {
-            String[] values = association.split("=");
+        // WebStorm
+        addLanguage("HTML", "html");
+        addLanguage("CSS", "css");
+        addLanguage("LESS", "less", "css");
+        addLanguage("SASS", "sass", "compass", "bourbon", "neat", "css");
+        addLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
+        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
+        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
+        addLanguage("MySQL", "mysql");
+        addLanguage("SQLite", "sqlite");
 
-            if ( values.length == 2 ) {
-                if ( values[0].substring(0, 1).equals(".") ) {
-                    extensionMap.put(values[0].substring(1), values[1]);
-                }
-                else {
-                    typeMap.put(values[0], values[1]);
-                }
-            }
-        }
-    }
+        // PhpStorm
+        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "symfony", "typo3", "twig", "smarty");
+        addLanguage("SmartyConfig", "smarty");
 
-    private void initDefaults()
-    {
         /*
-            Associations are customizable in "~/Library/Preferences/%IDE_NAME%/options/options.xml" under the property "DASH_PLUGIN_KEYWORDS"
-            %IDE_NAME% might be "WebIde60", "IdeaIC12", or "AndroidStudioPreview".
+        Supported Languages
 
-            Values pairs can be provided in a semi-colon delimited list. The value pair consists of FILE_TYPE=KEYWORD
-            File type names can be found in the IDE settings. Instead of file types file extensions can be used. The file extension has to start with a dot.
+        IntelliJ Community Editon:
+        JQL DTD SPI Properties TEXT RegExp RELAX-NG XHTML YouTrack XPath2 XPath XML Renderscript Manifest Groovy AIDL
 
-             ex: HTML=html;.xhtml=html
-                  |           |
-                  |          Uses Dash keyword "html" for files with .xhtml extension (extensions have priority over file types)
-                 Uses Dash keyword "html" for files of type HTML
+        PhpStorm:
+        CSS Asp Twig RegExp JSP PostgreSQL  Apple JS SQL92 ReST MySQL SQLite SmartyConfig HAML H2 DB2 GWT JavaScript TypeScript SASS XML JS in HTML JavaScript 1.8 Smarty PostgresPLSQL JQL LESS OracleSqlPlus yaml HSQLDB CoffeeScript ApacheConfig DTD JSON textmate JavaScript 1.5 Sybase Locale ECMA Script Level 4 ECMAScript 6 JavaScript 1.7 Gherkin Derby TEXT XHTML SCSS PHP XPath XPath2 RELAX-NG JavaScript 1.6 SQL YouTrack TSQL JQuery-CSS Ini JavaScript Oracle JSPX GenericSQL HTML
+
+
+        showRegisteredLanguages();
          */
-
-        PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
-
-        if ( !propertiesComponent.isValueSet(CONFIG_KEYWORDS) ) {
-            // If it's Android Studio, use the Android docset instead of Java's.
-            if (ANDROID_STUDIO_PRODUCT_CODE.equals(ApplicationInfo.getInstance().getBuild().getProductCode())) {
-                // Really revolting hack but it gets the job done.
-                propertiesComponent.setValue(CONFIG_KEYWORDS, DEFAULT_KEYWORDS.replace("JAVA=java7;", "JAVA=android;"));
-            } else {
-                propertiesComponent.setValue(CONFIG_KEYWORDS, DEFAULT_KEYWORDS);
-            }
-        }
     }
 
-    public String findKeyword(String type, String extension)
+
+    private void showRegisteredLanguages() {
+        Collection<Language> languages = Language.getRegisteredLanguages();
+
+        String message = "";
+
+        for ( Language language : languages ) {
+            message += language.getID() + "\n";
+        }
+
+        Notifications.Bus.notify(new Notification("Dash", "Dash: Registered Languages ", message, NotificationType.INFORMATION));
+    }
+
+    private void addLanguage(String language, String... keywords)
     {
-        if ( extensionMap.containsKey(extension) ) {
-            return extensionMap.get(extension);
+        languageMap.put(language, Arrays.asList(keywords));
+    }
+
+    public String findLanguageName(Language language)
+    {
+        while ( language != null ) {
+            if ( languageMap.containsKey(language.getID()) ) {
+                return language.getID();
+            }
+
+            language = language.getBaseLanguage();
+        }
+
+        return null;
+    }
+
+    public List<String> findKeywords(Language language)
+    {
+        String languageName = findLanguageName(language);
+
+        if ( languageName != null ) {
+            return languageMap.get(languageName);
         }
         else {
-            return typeMap.get(cleanType(type));
+            return new ArrayList<String>();
         }
     }
 
-    public String cleanType(String type)
+    private String javaKeyword()
     {
-        type = type.replaceFirst("\\(.*\\)", "");
-        type = type.replace("files", "");
-        type = type.trim();
-
-        return type;
+        if ( ANDROID_STUDIO_PRODUCT_CODE.equals(ApplicationInfo.getInstance().getBuild().getProductCode()) ) {
+            return "android";
+        }
+        else {
+            return "java";
+        }
     }
 }

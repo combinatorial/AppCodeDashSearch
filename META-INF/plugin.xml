@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>2.2</version>
+  <version>3.0 beta 1</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -10,23 +10,11 @@ The default shortcut assigned in the plugin is Mac-Shift-D.<br />
 <br />
 Dash is a Mac OSX utility that can be obtained <a href="http://kapeli.com/dash">here</a>.<br />
 <br />
-The plugin will use the documents file type to determine which docset keyword to use in Dash.<br />
-These associations are customizable in "~/Library/Preferences/%IDE_NAME%/options/options.xml" under the property "DASH_PLUGIN_KEYWORDS"<br />
-%IDE_NAME% might be "WebIde60", "IdeaIC12" or "AndroidStudioPreview".<br />
-<br />
-Values pairs can be provided in a semi-colon delimited list. The value pair consists of FILE_TYPE=KEYWORD<br />
-File type names can be found in the IDE settings. Instead of file types file extensions can be used. The file extension has to start with a dot.<br />
-<pre>
- ex: HTML=html;.xhtml=html
-      |           |
-      |          Uses Dash keyword "html" for files with .xhtml extension (extensions have priority over file types)
-     Uses Dash keyword "html" for files of type HTML
-</pre>
-<br />
-Initially developed by <a href="http://www.linkedin.com/in/combinatorial">David Brittain</a>
+The plugin will identify the currently used programming language through context and request filtered search results accordingly.
     ]]></description>
 
   <change-notes><![CDATA[
+3.0 Context aware search<br />
 2.2 Compatibility and stability fixes<br />
 2.1 Added Ruby syntax support, stability fixes<br />
 2.0 Added Dash docset keyword support<br />
@@ -50,8 +38,7 @@ Initially developed by <a href="http://www.linkedin.com/in/combinatorial">David 
 
   <actions>
     <!-- Add your actions here -->
-      <action id="DashLauncherAction" class="com.paperetto.dash.DashLauncherAction" text="Search in Dash"
-              description="Searches word under caret in Dash">
+      <action id="DashLauncherAction" class="de.dreamlab.dash.DashLauncherAction" text="Search in Dash" description="Searches word under caret in Dash">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
       </action>
