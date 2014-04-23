@@ -53,22 +53,24 @@ public class DashLauncherAction extends AnAction {
         }
 
         if ( query != null ) {
-            // TODO remove debug message
-            if ( language != null ) {
-                String resolvedLanguage = keywordLookup.findLanguageName(language);
-                String message = "Searching Dash docsets with language: " + language.getID();
+            // show status message for potential troubleshooting
+            String resolvedLanguage = keywordLookup.findLanguageName(language);
 
-                if ( !language.getID().equals(resolvedLanguage) ) {
-                    if ( resolvedLanguage == null ) {
-                        resolvedLanguage = "*";
-                    }
-
-                    message += " (resolved to: " + resolvedLanguage + ")";
-                }
-
-                StatusBarUtil.setStatusBarInfo(e.getProject(), message);
+            String message;
+            if ( resolvedLanguage == null ) {
+                message = "Searching all docsets in Dash";
+            }
+            else {
+                message = "Searching \"" + resolvedLanguage + "\" docsets in Dash";
             }
 
+            if ( !language.getID().equals(resolvedLanguage) ) {
+                message += ". Based on \"" + language.getID() + "\" context";
+            }
+
+            StatusBarUtil.setStatusBarInfo(e.getProject(), message);
+
+            // open dash
             dashLauncher.search(keywordLookup.findKeywords(language), query);
         }
     }
