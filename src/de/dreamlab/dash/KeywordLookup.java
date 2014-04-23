@@ -46,18 +46,35 @@ public class KeywordLookup {
         CSS Asp Twig RegExp JSP PostgreSQL  Apple JS SQL92 ReST MySQL SQLite SmartyConfig HAML H2 DB2 GWT JavaScript TypeScript SASS XML JS in HTML JavaScript 1.8 Smarty PostgresPLSQL JQL LESS OracleSqlPlus yaml HSQLDB CoffeeScript ApacheConfig DTD JSON textmate JavaScript 1.5 Sybase Locale ECMA Script Level 4 ECMAScript 6 JavaScript 1.7 Gherkin Derby TEXT XHTML SCSS PHP XPath XPath2 RELAX-NG JavaScript 1.6 SQL YouTrack TSQL JQuery-CSS Ini JavaScript Oracle JSPX GenericSQL HTML
 
 
-        showRegisteredLanguages();
+        /*
+            use the following command to display all available languages in the event log. intended for development purposes.
+            listRegisteredLanguages();
          */
     }
 
 
-    private void showRegisteredLanguages() {
+    private void listRegisteredLanguages() {
         Collection<Language> languages = Language.getRegisteredLanguages();
 
-        String message = "";
+        ArrayList<String> languageList = new ArrayList<String>();
 
         for ( Language language : languages ) {
-            message += language.getID() + "\n";
+            String languageStr = language.getID();
+
+            Language baseLanguage = language.getBaseLanguage();
+            while ( baseLanguage != null ) {
+                languageStr += " <- " + baseLanguage.getID();
+                baseLanguage = baseLanguage.getBaseLanguage();
+            }
+
+            languageList.add(languageStr);
+        }
+
+        Collections.sort(languageList);
+
+        String message = "";
+        for ( String s : languageList ) {
+            message += s + "\n";
         }
 
         Notifications.Bus.notify(new Notification("Dash", "Dash: Registered Languages ", message, NotificationType.INFORMATION));
