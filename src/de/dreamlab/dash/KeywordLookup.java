@@ -18,32 +18,44 @@ public class KeywordLookup {
     {
         languageMap = new HashMap<String, List<String>>();
 
-        // IntelliJ
-        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing");
-
-        // WebStorm
+        // IntelliJ Community Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
         addLanguage("HTML", "html");
+        addLanguage("XHTML", "html");
+        addLanguage("XML", "xml");
+        addLanguage("XPath", "xml"); // not RubyMine, not PyCharm
+        addLanguage("RegExp", "regex");
+
+        // WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
         addLanguage("CSS", "css");
+        addLanguage("JQuery-CSS", "css", "jquery", "jqueryui", "jquerym");
         addLanguage("LESS", "less", "css");
         addLanguage("SASS", "sass", "compass", "bourbon", "neat", "css");
         addLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
-        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
+        addLanguage("Stylus", "stylus", "css"); // not PhpStorm
+        addLanguage("HAML", "haml");
         addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
-        addLanguage("MySQL", "mysql");
-        addLanguage("SQLite", "sqlite");
+        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
+        addLanguage("MySQL", "mysql"); // not WebStorm
+        addLanguage("SQLite", "sqlite"); // not WebStorm
 
-        // PhpStorm
-        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "symfony", "typo3", "twig", "smarty");
-        addLanguage("SmartyConfig", "smarty");
+        // IntelliJ Community Edition 13.1
+        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing");
+        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing"); // uncertain
+        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing"); // uncertain
 
-        /*
-        Supported Languages
-
-        IntelliJ Community Editon:
-        JQL DTD SPI Properties TEXT RegExp RELAX-NG XHTML YouTrack XPath2 XPath XML Renderscript Manifest Groovy AIDL
-
-        PhpStorm:
-        CSS Asp Twig RegExp JSP PostgreSQL  Apple JS SQL92 ReST MySQL SQLite SmartyConfig HAML H2 DB2 GWT JavaScript TypeScript SASS XML JS in HTML JavaScript 1.8 Smarty PostgresPLSQL JQL LESS OracleSqlPlus yaml HSQLDB CoffeeScript ApacheConfig DTD JSON textmate JavaScript 1.5 Sybase Locale ECMA Script Level 4 ECMAScript 6 JavaScript 1.7 Gherkin Derby TEXT XHTML SCSS PHP XPath XPath2 RELAX-NG JavaScript 1.6 SQL YouTrack TSQL JQuery-CSS Ini JavaScript Oracle JSPX GenericSQL HTML
+        // Products listed for each entry
+        addLanguage("Dart", "dartlang"); // WebStorm (not yet supported by Dash)
+        addLanguage("DjangoTemplate", "django"); // PyCharm
+        addLanguage("Groovy", "groovy"); // IntelliJ
+        addLanguage("Puppet", "puppet"); // RubyMine, PyCharm
+        addLanguage("Jade", "jade"); // WebStorm
+        addLanguage("JsInJade", "javascript", "jade"); // WebStorm
+        addLanguage("Markdown", "markdown"); // PhpStorm
+        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "symfony", "typo3", "twig", "smarty"); // PhpStorm
+        addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "cvp"); // PyCharm
+        addLanguage("Smarty", "smarty"); // PhpStorm
+        addLanguage("SmartyConfig", "smarty"); // PhpStorm
+        addLanguage("Twig", "twig"); // PhpStorm
 
 
         /*
