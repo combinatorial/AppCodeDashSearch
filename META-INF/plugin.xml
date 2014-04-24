@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.0</version>
+  <version>3.0.1</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -14,10 +14,11 @@ The plugin will identify the currently used programming language through context
     ]]></description>
 
   <change-notes><![CDATA[
-3.0 Context aware search<br />
-2.2 Compatibility and stability fixes<br />
-2.1 Added Ruby syntax support, stability fixes<br />
-2.0 Added Dash docset keyword support<br />
+3.0.1 Fixed missing Ruby context recognition<br />
+3.0   Added Context aware search<br />
+2.2   Compatibility and stability fixes<br />
+2.1   Added Ruby syntax support, stability fixes<br />
+2.0   Added Dash docset keyword support<br />
 ]]>
   </change-notes>
 
