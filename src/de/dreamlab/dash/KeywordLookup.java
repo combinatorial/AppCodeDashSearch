@@ -53,6 +53,7 @@ public class KeywordLookup {
         addLanguage("Markdown", "markdown"); // PhpStorm
         addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "symfony", "typo3", "twig", "smarty"); // PhpStorm
         addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "cvp"); // PyCharm
+        addLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
         addLanguage("Smarty", "smarty"); // PhpStorm
         addLanguage("SmartyConfig", "smarty"); // PhpStorm
         addLanguage("Twig", "twig"); // PhpStorm
