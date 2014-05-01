@@ -34,8 +34,13 @@ public class DashLauncherAction extends AnAction {
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
 
         PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
-        PsiElement psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
-        Language language = elementLanguage(psiElement);
+        PsiElement psiElement;
+        Language language;
+
+        if ( psiFile != null ) {
+            psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
+            language = elementLanguage(psiElement);
+        }
 
         String query = null;
 
