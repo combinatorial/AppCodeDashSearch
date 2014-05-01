@@ -8,10 +8,14 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
@@ -39,16 +43,44 @@ public class DashLauncherAction extends AnAction {
 
     public void actionPerformed(AnActionEvent e) {
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
+        if (editor == null) {
+            return;
+        }
 
-        PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
+        final Project project = e.getProject();
+        if (project == null) {
+            return;
+        }
+
+        // Get the module associated with the PSI_FILE item, if one is present.
+
+        Module module = null;
+        final PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
         PsiElement psiElement = null;
         Language language = null;
 
         String query;
         
         if ( psiFile != null ) {
+            module = ModuleUtil.findModuleForPsiElement(psiFile);
+
             psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
             language = elementLanguage(psiElement);
+
+            // Get the module associated with the PsiElement, if one is present.
+
+            if (module == null && psiElement != null) {
+                module = ModuleUtil.findModuleForPsiElement(psiElement);
+            }
+        }
+
+        // Get the module associated with the VIRTUAL_FILE, if one is present.
+
+        if (module == null) {
+            final VirtualFile virtualFile = e.getData(LangDataKeys.VIRTUAL_FILE);
+            if (virtualFile != null) {
+                module = ModuleUtil.findModuleForFile(virtualFile, project);
+            }
         }
 
         SelectionModel selectionModel = editor.getSelectionModel();
@@ -65,17 +97,25 @@ public class DashLauncherAction extends AnAction {
         }
 
         if ( query != null ) {
-            final Project project = e.getProject();
-            if (project == null) {
-                return;
-            }
 
             KeywordLookup keywordLookup = defaultKeywordLookup;
 
+            /*
+
+            Get the SDK associated with the previously found module, or use the project-wide SDK if
+            no module has been found.
+
+             */
+
+            final Sdk sdk;
+            if (module != null) {
+                sdk = ModuleRootManager.getInstance(module).getSdk();
+            } else {
+                sdk = ProjectRootManager.getInstance(project).getProjectSdk();
+            }
+
             // Check if the current project is Java + Android, or otherwise.
 
-            final ProjectRootManager projectRootManager = ProjectRootManager.getInstance(project);
-            final Sdk sdk = projectRootManager.getProjectSdk();
             if (sdk != null) {
                 final SdkTypeId sdkTypeId = sdk.getSdkType();
                 if (ANDROID_SDK_ID.equals(sdkTypeId.getName())) {
@@ -84,21 +124,22 @@ public class DashLauncherAction extends AnAction {
             }
 
             // show status message for potential troubleshooting
-            String resolvedLanguage = keywordLookup.findLanguageName(language);
+            final String resolvedLanguage = keywordLookup.findLanguageName(language);
 
-            String message;
+            final StringBuilder stringBuilder = new StringBuilder();
+
             if ( resolvedLanguage == null ) {
-                message = "Searching all docsets in Dash";
+                stringBuilder.append("Searching all docsets in Dash");
             }
             else {
-                message = "Searching \"" + resolvedLanguage + "\" docsets in Dash";
+                stringBuilder.append(String.format("Searching \"%s\" docsets in Dash.", resolvedLanguage));
             }
 
-            if ( !language.getID().equals(resolvedLanguage) ) {
-                message += ". Based on \"" + language.getID() + "\" context";
+            if (language != null && resolvedLanguage != null && !resolvedLanguage.equals(language.getID())) {
+                stringBuilder.append(String.format(" Based on \"%s\" context.", language.getID()));
             }
 
-            StatusBarUtil.setStatusBarInfo(project, message);
+            StatusBarUtil.setStatusBarInfo(project, stringBuilder.toString());
 
             // open dash
             keywordLookup.searchOnDash(language, query);
