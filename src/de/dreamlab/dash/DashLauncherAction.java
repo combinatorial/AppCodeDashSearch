@@ -12,10 +12,10 @@ import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import de.dreamlab.dash.DashLauncher;
-import de.dreamlab.dash.KeywordLookup;
 
 public class DashLauncherAction extends AnAction {
+    private static final String XML_LANGUAGE_ID = "XML";
+
     private KeywordLookup keywordLookup;
     private DashLauncher dashLauncher;
 
@@ -34,8 +34,8 @@ public class DashLauncherAction extends AnAction {
         Editor editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
 
         PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
-        PsiElement psiElement;
-        Language language;
+        PsiElement psiElement = null;
+        Language language = null;
 
         if ( psiFile != null ) {
             psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
@@ -86,10 +86,10 @@ public class DashLauncherAction extends AnAction {
             return null;
         }
 
-        if ( element.getLanguage().getID() == "XML" ) {
+        if ( XML_LANGUAGE_ID.equals(element.getLanguage().getID()) ) {
             PsiElement parent = element.getParent();
 
-            if ( parent.getLanguage().getID() != "XML" && parent.getLanguage().getBaseLanguage().getID() == "XML" ) {
+            if ( !XML_LANGUAGE_ID.equals(parent.getLanguage().getID()) && XML_LANGUAGE_ID.equals(parent.getLanguage().getBaseLanguage().getID()) ) {
                 return parent.getLanguage();
             }
         }
