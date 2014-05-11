@@ -3,6 +3,8 @@ A simple plugin for the IntelliJ Platform (IntelliJ IDEA, RubyMine, WebStorm, Ph
 ## Installation
 To install the plugin in your IntelliJ IDE go to Preferences -> Plugins -> Browse repositories and search for "Dash".
 
+**AppCode 1.x** users should manually install the plugin from: https://github.com/gdelmas/IntelliJDashPlugin/dsa/tag/2.2
+
 ## Kapeli Dash
 Dash is a Mac application for rapid search of developer documentation. It is free with nags to persuade you to pay and lose the nags. The free version is fully functional and super-useful. Get karma for buying and supporting the developer :) It can be downloaded here:
 [http://kapeli.com/dash](http://kapeli.com/dash)
