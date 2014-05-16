@@ -33,26 +33,26 @@ public class KeywordLookup {
         addLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
         addLanguage("Stylus", "stylus", "css"); // not PhpStorm
         addLanguage("HAML", "haml");
-        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
-        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "chai", "cordova", "phonegap");
+        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap");
+        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap");
         addLanguage("MySQL", "mysql"); // not WebStorm
         addLanguage("SQLite", "sqlite"); // not WebStorm
 
         // IntelliJ Community Edition 13.1
-        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing");
-        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing"); // uncertain
-        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing"); // uncertain
+        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc");
+        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // uncertain
+        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // uncertain
 
         // Products listed for each entry
-        addLanguage("Dart", "dartlang"); // WebStorm (not yet supported by Dash)
+        addLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm (not yet supported by Dash)
         addLanguage("DjangoTemplate", "django"); // PyCharm
         addLanguage("Groovy", "groovy"); // IntelliJ
         addLanguage("Puppet", "puppet"); // RubyMine, PyCharm
         addLanguage("Jade", "jade"); // WebStorm
         addLanguage("JsInJade", "javascript", "jade"); // WebStorm
         addLanguage("Markdown", "markdown"); // PhpStorm
-        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "symfony", "typo3", "twig", "smarty"); // PhpStorm
-        addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "cvp"); // PyCharm
+        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
+        addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp"); // PyCharm
         addLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
         addLanguage("Smarty", "smarty"); // PhpStorm
         addLanguage("SmartyConfig", "smarty"); // PhpStorm
