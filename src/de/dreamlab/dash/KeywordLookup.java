@@ -19,7 +19,7 @@ public class KeywordLookup {
         languageMap = new HashMap<String, List<String>>();
 
         // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
-        addLanguage("HTML", "html");
+        addLanguage("HTML", "html", "angularjs");
         addLanguage("XHTML", "html");
         addLanguage("XML", "xml");
         addLanguage("XPath", "xml"); // not RubyMine, not PyCharm
@@ -34,7 +34,7 @@ public class KeywordLookup {
         addLanguage("Stylus", "stylus", "css"); // not PhpStorm
         addLanguage("HAML", "haml");
         addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap"); // not IntelliJ
-        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap");
+        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap", "angularjs");
         addLanguage("MySQL", "mysql"); // not WebStorm
         addLanguage("SQLite", "sqlite"); // not WebStorm
 
