@@ -18,14 +18,14 @@ public class KeywordLookup {
     {
         languageMap = new HashMap<String, List<String>>();
 
-        // IntelliJ Community Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
+        // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
         addLanguage("HTML", "html");
         addLanguage("XHTML", "html");
         addLanguage("XML", "xml");
         addLanguage("XPath", "xml"); // not RubyMine, not PyCharm
         addLanguage("RegExp", "regex");
 
-        // WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
+        // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
         addLanguage("CSS", "css");
         addLanguage("JQuery-CSS", "css", "jquery", "jqueryui", "jquerym");
         addLanguage("LESS", "less", "css");
@@ -33,30 +33,41 @@ public class KeywordLookup {
         addLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
         addLanguage("Stylus", "stylus", "css"); // not PhpStorm
         addLanguage("HAML", "haml");
-        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap");
+        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap"); // not IntelliJ
         addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap");
         addLanguage("MySQL", "mysql"); // not WebStorm
         addLanguage("SQLite", "sqlite"); // not WebStorm
 
-        // IntelliJ Community Edition 13.1
-        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc");
-        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // uncertain
-        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // uncertain
-
         // Products listed for each entry
-        addLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm (not yet supported by Dash)
+        addLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm
         addLanguage("DjangoTemplate", "django"); // PyCharm
         addLanguage("Groovy", "groovy"); // IntelliJ
-        addLanguage("Puppet", "puppet"); // RubyMine, PyCharm
         addLanguage("Jade", "jade"); // WebStorm
+        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // IntelliJ
         addLanguage("JsInJade", "javascript", "jade"); // WebStorm
-        addLanguage("Markdown", "markdown"); // PhpStorm
+        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        addLanguage("Mxml", "actionscript"); // IntelliJ
         addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
+        addLanguage("Play", "playjava"); // IntelliJ; uncertain
+        addLanguage("Puppet", "puppet"); // RubyMine, PyCharm
         addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp"); // PyCharm
         addLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
         addLanguage("Smarty", "smarty"); // PhpStorm
         addLanguage("SmartyConfig", "smarty"); // PhpStorm
         addLanguage("Twig", "twig"); // PhpStorm
+
+        // Jetbrains Plugins
+        addLanguage("Haskell", "haskell");
+        addLanguage("Scala", "scala", "akka", "playscala");
+        addLanguage("SSP", "scala", "akka", "playscala");
+        addLanguage("TypoScript", "typo3");
+
+        // Third-party Plugins
+        addLanguage("Bash", "bash", "manpages");
+        addLanguage("Google Go", "go" ,"godoc");
+        addLanguage("Lua", "lua", "corona");
+        addLanguage("Markdown", "markdown");
 
 
         /*
