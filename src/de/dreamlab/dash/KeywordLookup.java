@@ -4,81 +4,86 @@ import com.intellij.lang.Language;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.projectRoots.Sdk;
+import de.dreamlab.dash.keywords.ExcludeSdkTypeKeyword;
+import de.dreamlab.dash.keywords.IKeyword;
+import de.dreamlab.dash.keywords.Keyword;
+import de.dreamlab.dash.keywords.SdkTypeSpecificKeyword;
 
 import java.util.*;
 
 public class KeywordLookup {
-    protected final Map<String, List<String>> languageMap = new HashMap<String, List<String>>();
-    protected final DashLauncher launcher;
+    private HashMap<String, List<IKeyword>> languageMap;
 
-    public KeywordLookup(final DashLauncher dashLauncher)
+    public KeywordLookup()
     {
-        launcher = dashLauncher;
-        setUpLanguages();
-    }
-
-    protected void setUpLanguages() {
-        // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
-        addLanguage("HTML", "html", "angularjs");
-        addLanguage("XHTML", "html");
-        addLanguage("XML", "xml");
-        addLanguage("XPath", "xml"); // not RubyMine, not PyCharm
-        addLanguage("RegExp", "regex");
+        languageMap = new HashMap<String, List<IKeyword>>();
 
         // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
-        addLanguage("CSS", "css");
-        addLanguage("JQuery-CSS", "css", "jquery", "jqueryui", "jquerym");
-        addLanguage("LESS", "less", "css");
-        addLanguage("SASS", "sass", "compass", "bourbon", "neat", "css");
-        addLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
-        addLanguage("Stylus", "stylus", "css"); // not PhpStorm
-        addLanguage("HAML", "haml");
-        addLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap"); // not IntelliJ
-        addLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap", "angularjs");
-        addLanguage("MySQL", "mysql"); // not WebStorm
-        addLanguage("SQLite", "sqlite"); // not WebStorm
+        setLanguage("HTML", "html", "angularjs");
+        setLanguage("XHTML", "html");
+        setLanguage("XML", "xml");
+        setLanguage("XPath", "xml"); // not RubyMine, not PyCharm
+        setLanguage("RegExp", "regex");
 
-        // IntelliJ Community Edition 13.1
-        addLanguage("JAVA", "java6", "java7", "java8", "jee6", "jee7", "javadoc", "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing");
-        addLanguage("JSP", "java6", "java7", "java8", "jee6", "jee7", "javadoc", "grails", "groovy", "playjava", "spring", "html", "xml", "css");
-        addLanguage("JSPX", "java6", "java7", "java8", "jee6", "jee7", "javadoc", "grails", "groovy", "playjava", "spring", "html", "xml", "css");
+        // IntelliJ Ultimate Edition 13.1, WebStorm 8.0, PhpStorm 7.1, RubyMine 6.3, PyCharm 3.1
+        setLanguage("CSS", "css");
+        setLanguage("JQuery-CSS", "css", "jquery", "jqueryui", "jquerym");
+        setLanguage("LESS", "less", "css");
+        setLanguage("SASS", "sass", "compass", "bourbon", "neat", "css");
+        setLanguage("SCSS", "sass", "compass", "bourbon", "neat", "css");
+        setLanguage("Stylus", "stylus", "css"); // not PhpStorm
+        setLanguage("HAML", "haml");
+        setLanguage("CoffeeScript", "coffee", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap"); // not IntelliJ
+        setLanguage("JavaScript", "javascript", "jquery", "jqueryui", "jquerym", "backbone", "marionette", "meteor", "sproutcore", "moo", "prototype", "bootstrap", "foundation", "lodash", "underscore", "ember", "sencha", "extjs", "titanium", "knockout", "zepto", "yui", "d3", "dojo", "nodejs", "express", "grunt", "mongoose", "moment", "require", "awsjs", "jasmine", "sinon", "chai", "cordova", "phonegap", "angularjs");
+        setLanguage("MySQL", "mysql"); // not WebStorm
+        setLanguage("SQLite", "sqlite"); // not WebStorm
 
         // Products listed for each entry
-        addLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm
-        addLanguage("DjangoTemplate", "django"); // PyCharm
-        addLanguage("Groovy", "groovy"); // IntelliJ
-        addLanguage("Jade", "jade"); // WebStorm
-        addLanguage("JAVA", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "processing", "javadoc"); // IntelliJ
-        addLanguage("JsInJade", "javascript", "jade"); // WebStorm
-        addLanguage("JSP", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
-        addLanguage("JSPX", javaKeyword(), "javafx", "grails", "groovy", "playjava", "spring", "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
-        addLanguage("Mxml", "actionscript"); // IntelliJ
-        addLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
-        addLanguage("Play", "playjava"); // IntelliJ; uncertain
-        addLanguage("Puppet", "puppet"); // RubyMine, PyCharm
-        addLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp"); // PyCharm
-        addLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
-        addLanguage("Smarty", "smarty"); // PhpStorm
-        addLanguage("SmartyConfig", "smarty"); // PhpStorm
-        addLanguage("Twig", "twig"); // PhpStorm
+        final IKeyword javaKeyword = new SdkTypeSpecificKeyword("java", "Android SDK", "android");
+        final IKeyword javaFxKeyword = new ExcludeSdkTypeKeyword("javafx", "Android SDK");
+        final IKeyword grailsKeyword = new ExcludeSdkTypeKeyword("grails", "Android SDK");
+        final IKeyword groovyKeyword = new ExcludeSdkTypeKeyword("groovy", "Android SDK");
+        final IKeyword playjavaKeyword = new ExcludeSdkTypeKeyword("playjava", "Android SDK");
+        final IKeyword springKeyword = new ExcludeSdkTypeKeyword("spring", "Android SDK");
+
+        setLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm
+        setLanguage("DjangoTemplate", "django"); // PyCharm
+        setLanguage("Groovy", "groovy"); // IntelliJ
+        setLanguage("Jade", "jade"); // WebStorm
+        setLanguage("JAVA", javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "processing", "javadoc"); // IntelliJ
+        setLanguage("JsInJade", "javascript", "jade"); // WebStorm
+        setLanguage("JSP", javaKeyword,  javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        setLanguage("JSPX", javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        setLanguage("Mxml", "actionscript"); // IntelliJ
+        setLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
+        setLanguage("Play", "playjava"); // IntelliJ; uncertain
+        setLanguage("Puppet", "puppet"); // RubyMine, PyCharm
+        setLanguage("Python", "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp"); // PyCharm
+        setLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
+        setLanguage("Smarty", "smarty"); // PhpStorm
+        setLanguage("SmartyConfig", "smarty"); // PhpStorm
+        setLanguage("Twig", "twig"); // PhpStorm
 
         // Jetbrains Plugins
-        addLanguage("Haskell", "haskell");
-        addLanguage("Scala", "scala", "akka", "playscala");
-        addLanguage("SSP", "scala", "akka", "playscala");
-        addLanguage("TypoScript", "typo3");
+        setLanguage("Haskell", "haskell");
+        setLanguage("Scala", "scala", "akka", "playscala");
+        setLanguage("SSP", "scala", "akka", "playscala");
+        setLanguage("TypoScript", "typo3");
 
         // Third-party Plugins
-        addLanguage("Bash", "bash", "manpages");
-        addLanguage("Google Go", "go" ,"godoc");
-        addLanguage("Lua", "lua", "corona");
-        addLanguage("Markdown", "markdown");
+        setLanguage("Bash", "bash", "manpages");
+        setLanguage("Google Go", "go", "godoc");
+        setLanguage("Lua", "lua", "corona");
+        setLanguage("Markdown", "markdown");
+
 
         /*
             use the following command to display all available languages in the event log. intended for development purposes.
             listRegisteredLanguages();
          */
     }
+
 
     private void listRegisteredLanguages() {
         Collection<Language> languages = Language.getRegisteredLanguages();
@@ -107,12 +112,27 @@ public class KeywordLookup {
         Notifications.Bus.notify(new Notification("Dash", "Dash: Registered Languages ", message, NotificationType.INFORMATION));
     }
 
-    protected void addLanguage(String language, String... keywords)
+    private void setLanguage(String language, Object... keywords)
     {
-        languageMap.put(language, Arrays.asList(keywords));
+        ArrayList<IKeyword> keywordList = new ArrayList<IKeyword>();
+
+        for (Object keyword : keywords) {
+            if ( keyword instanceof String ) {
+                keywordList.add(new Keyword((String) keyword));
+            }
+            else if ( keyword instanceof IKeyword ) {
+                keywordList.add((IKeyword) keyword);
+            }
+            else {
+                throw new Error("Invalid keyword");
+            }
+
+        }
+
+        languageMap.put(language, keywordList);
     }
 
-    protected String findLanguageName(Language language)
+    public String findLanguageName(Language language)
     {
         while ( language != null ) {
             if ( languageMap.containsKey(language.getID()) ) {
@@ -125,19 +145,21 @@ public class KeywordLookup {
         return null;
     }
 
-    protected List<String> findKeywords(Language language)
+    public List<String> findKeywords(Language language, Sdk sdk)
     {
+        ArrayList<String> result = new ArrayList<String>();
+
         String languageName = findLanguageName(language);
-
         if ( languageName != null ) {
-            return languageMap.get(languageName);
-        }
-        else {
-            return new ArrayList<String>();
-        }
-    }
+            for ( IKeyword keyword : languageMap.get(languageName) ) {
+                String name = keyword.getName(sdk);
 
-    public void searchOnDash(final Language language, final String query) {
-        launcher.search(findKeywords(language), query);
+                if ( name != null ) {
+                    result.add(name);
+                }
+            }
+        }
+
+        return result;
     }
 }
