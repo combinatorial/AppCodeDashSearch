@@ -12,7 +12,7 @@ public class ExcludeSdkTypeKeyword implements IKeyword {
     }
 
     public String getName(Sdk sdk) {
-        if ( sdkType != null && !sdkType.equals(sdk.getSdkType().getName()) ) {
+        if ( sdkType == null || !sdkType.equals(sdk.getSdkType().getName()) ) {
             return keyword;
         }
         else {
