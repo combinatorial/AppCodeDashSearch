@@ -14,5 +14,5 @@ The default shortcut assigned in the plugin is **Mac-Shift-D**.
 It either uses the current selection for the search, or the caret position. The plugin will identify the currently used programming language through context and request filtered search results accordingly.
 
 ## Troubleshooting
-######The installation from the repositories does not work
+######In rare conditions the installation from the repositories does not work
 It looks like there is an IntelliJ/Java bug with OS X Mavericks which prevents to install plugins from the repositories. Please install the plugin manually from [here](https://github.com/gdelmas/IntelliJDashPlugin/releases). For additional information check [issue #13](https://github.com/gdelmas/IntelliJDashPlugin/issues/13).
