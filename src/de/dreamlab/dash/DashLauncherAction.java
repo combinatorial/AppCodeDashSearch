@@ -84,7 +84,7 @@ public class DashLauncherAction extends AnAction {
             }
 
             if ( language != null && !language.getID().equals(resolvedLanguage) ) {
-                messageBuilder.append(String.format(" Based on \"%s\" context.", language.getID()));
+                messageBuilder.append(String.format(". Based on \"%s\" context.", language.getID()));
             }
 
             Project project = e.getProject();
