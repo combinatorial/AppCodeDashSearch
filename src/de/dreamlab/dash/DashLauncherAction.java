@@ -2,13 +2,11 @@ package de.dreamlab.dash;
 
 
 import com.intellij.lang.Language;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.module.Module;
@@ -22,6 +20,13 @@ import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
+
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 
 public class DashLauncherAction extends AnAction {
     private static final String XML_LANGUAGE_ID = "XML";
@@ -46,12 +51,26 @@ public class DashLauncherAction extends AnAction {
             return;
         }
 
+        final Project project = e.getProject();
         final PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
         PsiElement psiElement = null;
         Language language = null;
 
         if ( psiFile != null ) {
-            psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
+            int caretOffset = editor.getCaretModel().getOffset();
+
+            if ( project != null ) {
+                InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(e.getProject());
+
+                if ( injectedLanguageManager != null ) {
+                    psiElement = injectedLanguageManager.findInjectedElementAt(psiFile, caretOffset);
+                }
+            }
+
+            if ( psiElement == null ) {
+                psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
+            }
+
             language = elementLanguage(psiElement);
         }
 
@@ -86,8 +105,6 @@ public class DashLauncherAction extends AnAction {
             if ( language != null && !language.getID().equals(resolvedLanguage) ) {
                 messageBuilder.append(String.format(". Based on \"%s\" context.", language.getID()));
             }
-
-            Project project = e.getProject();
 
             if ( project != null ) {
                 StatusBarUtil.setStatusBarInfo(project, messageBuilder.toString());
