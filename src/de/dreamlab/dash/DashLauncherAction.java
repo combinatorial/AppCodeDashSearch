@@ -49,6 +49,8 @@ public class DashLauncherAction extends AnAction {
 
         final Project project = e.getProject();
         final PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
+        final VirtualFile virtualFile = e.getData(LangDataKeys.VIRTUAL_FILE);
+
         PsiElement psiElement = null;
         Language language = null;
 
@@ -107,7 +109,7 @@ public class DashLauncherAction extends AnAction {
             }
 
             // open dash
-            dashLauncher.search(keywordLookup.findKeywords(language, getSdk(e, psiElement)), query);
+            dashLauncher.search(keywordLookup.findKeywords(language, getSdk(e, psiElement), project, psiFile, virtualFile), query);
 
             /*
             use the following command to display information about the sdk in use in the event log. intended for development purposes.

@@ -4,11 +4,11 @@ import com.intellij.lang.Language;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import de.dreamlab.dash.keywords.ExcludeSdkTypeKeyword;
-import de.dreamlab.dash.keywords.IKeyword;
-import de.dreamlab.dash.keywords.Keyword;
-import de.dreamlab.dash.keywords.SdkTypeSpecificKeyword;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import de.dreamlab.dash.keywords.*;
 
 import java.util.*;
 
@@ -64,6 +64,10 @@ public class KeywordLookup {
         setLanguage("Smarty", "smarty"); // PhpStorm
         setLanguage("SmartyConfig", "smarty"); // PhpStorm
         setLanguage("Twig", "twig"); // PhpStorm
+
+        // SQL
+        setLanguage("SQL", new SqlDialectDependentKeyword("mysql", "mysql", "sqlite", "psql"));
+        setLanguage("PostgreSQL", "psql");
 
         // Jetbrains Plugins
         setLanguage("Haskell", "haskell");
@@ -145,14 +149,14 @@ public class KeywordLookup {
         return null;
     }
 
-    public List<String> findKeywords(Language language, Sdk sdk)
+    public List<String> findKeywords(Language language, Sdk sdk, final Project project, final PsiFile psiFile, final VirtualFile virtualFile)
     {
         ArrayList<String> result = new ArrayList<String>();
 
         String languageName = findLanguageName(language);
         if ( languageName != null ) {
             for ( IKeyword keyword : languageMap.get(languageName) ) {
-                String name = keyword.getName(sdk);
+                String name = keyword.getName(sdk, project, psiFile, virtualFile);
 
                 if ( name != null ) {
                     result.add(name);
