@@ -1,11 +1,9 @@
 package de.dreamlab.dash.keywords;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
+import de.dreamlab.dash.LookupInfoDictionary;
 
-public class ExcludeSdkTypeKeyword implements IKeyword {
+public class ExcludeSdkTypeKeyword extends AbstractSdkKeyword implements IKeyword {
     private String keyword;
     private String sdkType;
 
@@ -14,8 +12,13 @@ public class ExcludeSdkTypeKeyword implements IKeyword {
         this.sdkType = sdkType;
     }
 
-    public String getName(Sdk sdk, final Project project, final PsiFile psiFile, final VirtualFile virtualFile) {
-        if ( sdkType == null || !sdkType.equals(sdk.getSdkType().getName()) ) {
+    public String getName(final LookupInfoDictionary dict) {
+        Sdk sdk = getSdk(dict);
+
+        if ( sdkType == null ) {
+            return null;
+        }
+        else if ( sdk != null && !sdkType.equals(sdk.getSdkType().getName()) ) {
             return keyword;
         }
         else {

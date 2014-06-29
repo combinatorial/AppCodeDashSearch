@@ -1,10 +1,7 @@
 package de.dreamlab.dash.keywords;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
+import de.dreamlab.dash.LookupInfoDictionary;
 
 import java.util.HashMap;
 
@@ -21,15 +18,12 @@ public class SqlDialectDependentKeyword implements IKeyword {
     }
 
     @Override
-    public String getName(Sdk sdk, Project project, PsiFile psiFile, VirtualFile virtualFile) {
-        Language fileSqlLanguage = null;
+    public String getName(final LookupInfoDictionary dict) {
+        if ( !dict.isFileSqlLanguage() ) {
+            setDictFileSqlLanguage(dict);
+        }
 
-        try {
-            Class.forName("com.intellij.sql.dialects.SqlDialectMappings");
-            fileSqlLanguage = com.intellij.sql.dialects.SqlDialectMappings.getMapping(project, virtualFile);
-        }
-        catch (ClassNotFoundException e) {
-        }
+        Language fileSqlLanguage = dict.getFileSqlLanguage();
 
         if ( fileSqlLanguage != null ) {
             return languageMap.get(findLanguageName(fileSqlLanguage));
@@ -50,6 +44,20 @@ public class SqlDialectDependentKeyword implements IKeyword {
         }
 
         return null;
+    }
+
+    private void setDictFileSqlLanguage(LookupInfoDictionary dict)
+    {
+        Language language = null;
+
+        try {
+            Class.forName("com.intellij.sql.dialects.SqlDialectMappings");
+            language = com.intellij.sql.dialects.SqlDialectMappings.getMapping(dict.getProject(), dict.getVirtualFile());
+        }
+        catch (ClassNotFoundException e) {
+        }
+
+        dict.setFileSqlLanguage(language);
     }
 
 }

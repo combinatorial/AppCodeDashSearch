@@ -4,10 +4,6 @@ import com.intellij.lang.Language;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
 import de.dreamlab.dash.keywords.*;
 
 import java.util.*;
@@ -149,14 +145,14 @@ public class KeywordLookup {
         return null;
     }
 
-    public List<String> findKeywords(Language language, Sdk sdk, final Project project, final PsiFile psiFile, final VirtualFile virtualFile)
+    public List<String> findKeywords(final LookupInfoDictionary dict)
     {
         ArrayList<String> result = new ArrayList<String>();
 
-        String languageName = findLanguageName(language);
+        String languageName = findLanguageName(dict.getLanguage());
         if ( languageName != null ) {
             for ( IKeyword keyword : languageMap.get(languageName) ) {
-                String name = keyword.getName(sdk, project, psiFile, virtualFile);
+                String name = keyword.getName(dict);
 
                 if ( name != null ) {
                     result.add(name);
