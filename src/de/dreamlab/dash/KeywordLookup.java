@@ -36,6 +36,7 @@ public class KeywordLookup {
         setLanguage("SQLite", "sqlite"); // not WebStorm
 
         // Products listed for each entry
+        final IKeyword javaVersionedKeyword = new JavaSdkVersionDependentKeyword("java6", "java7", "java8");
         final IKeyword javaKeyword = new SdkTypeSpecificKeyword("java", "Android SDK", "android");
         final IKeyword javaFxKeyword = new ExcludeSdkTypeKeyword("javafx", "Android SDK");
         final IKeyword grailsKeyword = new ExcludeSdkTypeKeyword("grails", "Android SDK");
@@ -47,10 +48,10 @@ public class KeywordLookup {
         setLanguage("DjangoTemplate", "django"); // PyCharm
         setLanguage("Groovy", "groovy"); // IntelliJ
         setLanguage("Jade", "jade"); // WebStorm
-        setLanguage("JAVA", javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "processing", "javadoc"); // IntelliJ
+        setLanguage("JAVA", javaVersionedKeyword, javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "processing", "javadoc"); // IntelliJ
         setLanguage("JsInJade", "javascript", "jade"); // WebStorm
-        setLanguage("JSP", javaKeyword,  javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
-        setLanguage("JSPX", javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        setLanguage("JSP", javaVersionedKeyword, javaKeyword,  javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
+        setLanguage("JSPX", javaVersionedKeyword, javaKeyword, javaFxKeyword, grailsKeyword, groovyKeyword, playjavaKeyword, springKeyword, "cvj", "javadoc"); // IntelliJ, WebStorm, PhpStorm
         setLanguage("Mxml", "actionscript"); // IntelliJ
         setLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
         setLanguage("Play", "playjava"); // IntelliJ; uncertain
