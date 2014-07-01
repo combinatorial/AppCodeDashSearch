@@ -1,32 +1,27 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.1 beta 2</version>
+  <version>3.1</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
-A simple and intelligent plugin for the IntelliJ Platform (IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, Android Studio) that provides keyboard shortcut access for Dash.
-<br />
-<br />
-<a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-<br />
-<h3>Usage</h3>
-The default shortcut assigned in the plugin is <b>Mac-Shift-D</b>.
-It either uses the caret position for the search, or the current selection. The plugin will identify the currently used programming language through context and request filtered search results accordingly.
-<br />
-<h3>Dash</h3>
-Dash is a Mac application for rapid search of developer documentation. There is a free, fully functional version with nags. It can be downloaded <a href="http://kapeli.com/dash">here</a>.<br />
-<br />
-<h3>What's new</h3>
-In the past months I have been adding and testing new features for the plugin. I am now happy to release a lot of these additions that will make your search results just better. <br />
-<br />
-From now on code in strings will be detected. This way it is no longer necessary to select a specific word, the plugin will automatically know what you want to look up by the caret position. A lot of strings contain SQL code and for these your results will only from a SQL docset. In Project Settings -> SQL Dialects you can set which SQL docset you want to search. There are docsets available for MySQL, PostgreSQL and SQLite.<br />
-<br />
-If you have the "Regular Expressions" cheatsheet installed in Dash you can lookup groups, quantifiers and special characters really quickly. Just try and check what /\v/ means.<br />
-<br />
-Android projects get results from the Android docs, not Java. Java results depend on the projects SDK setting, searching either Java 6, 7 or 8. The same goes for Python 2 or 3. Apart from that I added support for Bash, Go, Haskell, Lua, Markdown, Scala and TypoScript. Language support for JavaScript and others has been extended.<br />
-<br />
-Simplicity is really important to me, that's why I always try to keep the plugin smart and settings free. I hope this help you spend less time searching the reference. Make the best of it.<br />
+<p>A smart and simple plugin that provides keyboard shortcut access for Dash in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.</p>
+<p>&nbsp;</p>
+<p><a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
+
+<p><h3><b>Usage</b></h3></p>
+<p>The default shortcut assigned in the plugin is <b>Cmd-Shift-D</b>.</p>
+<p>It either uses the caret position for the search, or the current selection. The plugin will identify the currently used programming language and request filtered search results accordingly.</p>
+
+<p><h3><b>Kapeli Dash App</b></h3></p>
+<p>Dash is a Mac application for rapid search of developer documentation. There is a free, fully functional version with nags. It can be downloaded <a href="http://kapeli.com/dash">here</a>.</p>
+
+<p><h3><b>What's new</b></h3></p>
+<p style="margin-bottom:10px">In the past months I have been adding and testing new features for the plugin. I am now happy to release a lot of these additions that will make your search results just better.</p>
+<p style="margin-bottom:10px">From now on code in strings will be recognized. This way it is no longer necessary to select a specific word, the plugin will automatically know what you want to look up by the caret position. A lot of strings contain SQL code and for these your results will only be from a SQL docset. In Project Settings -> SQL Dialects you can set which SQL docset you want to search. There are docsets available for MySQL, PostgreSQL and SQLite.</p>
+<p style="margin-bottom:10px">If you have the "Regular Expressions" cheatsheet installed in Dash you can lookup groups, quantifiers and special characters really quickly. Just try and check what /\v/ stands for.</p>
+<p style="margin-bottom:10px">Android projects get results from the Android docs, not Java. Java results depend on the projects SDK setting, searching either Java 6, 7 or 8. The same goes for Python 2 or 3. Apart from that I added support for Bash, Go, Haskell, Lua, Markdown, Scala and TypoScript. Language support for JavaScript and others has been enhanced.</p>
+<p style="margin-bottom:10px">Simplicity is really important to me, that's why I always try to keep the plugin smart, simple and settings free. I hope this helps you spend less time searching the reference. Make the best of it.</p>
 ]]></description>
 
   <change-notes><![CDATA[
