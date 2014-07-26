@@ -1,8 +1,11 @@
 package de.dreamlab.dash.keywords;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import de.dreamlab.dash.LookupInfoDictionary;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class SqlDialectDependentKeyword implements IKeyword {
@@ -51,10 +54,13 @@ public class SqlDialectDependentKeyword implements IKeyword {
         Language language = null;
 
         try {
-            Class.forName("com.intellij.sql.dialects.SqlDialectMappings");
-            language = com.intellij.sql.dialects.SqlDialectMappings.getMapping(dict.getProject(), dict.getVirtualFile());
+//          using reflection for the following command, because of optional dependencies
+//          language = com.intellij.sql.dialects.SqlDialectMappings.getMapping(dict.getProject(), dict.getVirtualFile());
+            Class sqlClass = Class.forName("com.intellij.sql.dialects.SqlDialectMappings");
+            Method getMappingMethod = sqlClass.getMethod("getMapping", Project.class, VirtualFile.class);
+            language = (Language)getMappingMethod.invoke(null, dict.getProject(), dict.getVirtualFile());
         }
-        catch (ClassNotFoundException e) {
+        catch (Throwable e) {
         }
 
         dict.setFileSqlLanguage(language);
