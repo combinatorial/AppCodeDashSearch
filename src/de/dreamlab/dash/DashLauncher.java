@@ -4,14 +4,13 @@
 
 package de.dreamlab.dash;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 
+import java.awt.Desktop;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Collection;
 
@@ -54,17 +53,15 @@ public class DashLauncher {
         }
     }
 
-    private void openUri(String uri)
+    private void openUri(String uriStr)
     {
         try {
-            final GeneralCommandLine commandLine = new GeneralCommandLine(ExecUtil.getOpenCommandPath());
-            commandLine.addParameter(uri);
-            commandLine.createProcess();
-
+            Desktop desktop = Desktop.getDesktop();
+            URI uri = new URI(uriStr);
+            desktop.browse(uri);
         }
-        catch ( ExecutionException e ) {
+        catch (Throwable e) {
             Notifications.Bus.notify(new Notification("Dash Plugin Error", "Dash Plugin Error", e.getMessage(), NotificationType.ERROR));
-            return;
         }
     }
 
