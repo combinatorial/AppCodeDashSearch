@@ -70,13 +70,14 @@ public class DashLauncherAction extends AnAction {
         }
 
         String query;
+        String resolvedLanguage = keywordLookup.findLanguageName(language);
 
         SelectionModel selectionModel = editor.getSelectionModel();
         if ( selectionModel.hasSelection() ) {
             query = selectionModel.getSelectedText();
         }
         else {
-            if ( psiElement == null || psiElement instanceof PsiComment ) {
+            if ( psiElement == null || psiElement instanceof PsiComment || resolvedLanguage == null ) {
                 query = getWordAtCursor(editor);
             }
             else {
@@ -86,8 +87,6 @@ public class DashLauncherAction extends AnAction {
 
         if ( query != null ) {
             // show status message for potential troubleshooting
-            String resolvedLanguage = keywordLookup.findLanguageName(language);
-
             final StringBuilder messageBuilder = new StringBuilder();
 
             if ( resolvedLanguage == null ) {
