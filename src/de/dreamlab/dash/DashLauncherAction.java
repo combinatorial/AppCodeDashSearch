@@ -6,10 +6,7 @@ import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
@@ -19,13 +16,13 @@ import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import de.dreamlab.dash.keywords.AbstractSdkKeyword;
 
 public class DashLauncherAction extends AnAction {
     private static final String XML_LANGUAGE_ID = "XML";
 
     private KeywordLookup keywordLookup;
     private DashLauncher dashLauncher;
+    private boolean isPresentationInitialized = false;
 
     public DashLauncherAction()
     {
@@ -33,9 +30,41 @@ public class DashLauncherAction extends AnAction {
         dashLauncher = new DashLauncher();
     }
 
+    private void initPresentation()
+    {
+        String docAppName;
+
+        if ( SystemUtil.isIsOSWindows() ) {
+            docAppName = "Velocity";
+        }
+        else if ( SystemUtil.isIsOSLinux() ) {
+            docAppName = "Zeal";
+        }
+        else {
+            docAppName = "Dash";
+        }
+
+        Presentation presentation = this.getTemplatePresentation();
+        presentation.setText("Search in " + docAppName);
+        presentation.setDescription("Searches word under caret or selected text in " + docAppName);
+    }
+
     @Override
     public void update(AnActionEvent e) {
-        e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
+        super.update(e);
+
+        Presentation presentation = e.getPresentation();
+
+        if ( !isPresentationInitialized ) {
+            isPresentationInitialized = true;
+            initPresentation();
+
+            Presentation templatePresentation = getTemplatePresentation();
+            presentation.setText(templatePresentation.getText());
+            presentation.setDescription(templatePresentation.getDescription());
+        }
+
+        presentation.setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
     }
 
     public void actionPerformed(AnActionEvent e) {
