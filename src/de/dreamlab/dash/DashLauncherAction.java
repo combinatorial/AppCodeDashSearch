@@ -17,6 +17,7 @@ import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import de.dreamlab.dash.launcher.AbstractLauncher;
 
 import javax.swing.*;
 
@@ -24,13 +25,14 @@ public class DashLauncherAction extends AnAction {
     private static final String XML_LANGUAGE_ID = "XML";
 
     private KeywordLookup keywordLookup;
-    private DashLauncher dashLauncher;
+    private AbstractLauncher launcher;
     private boolean isPresentationInitialized = false;
 
     public DashLauncherAction()
     {
         keywordLookup = new KeywordLookup();
-        dashLauncher = new DashLauncher();
+
+        launcher = AbstractLauncher.createInstance();
     }
 
     private void initPresentation()
@@ -141,7 +143,7 @@ public class DashLauncherAction extends AnAction {
             }
 
             // open dash
-            dashLauncher.search(keywordLookup.findKeywords(new LookupInfoDictionary(language, psiElement, project, psiFile, virtualFile)), query);
+            launcher.search(keywordLookup.findKeywords(new LookupInfoDictionary(language, psiElement, project, psiFile, virtualFile)), query);
 
             /*
             use the following command to display information about the sdk in use in the event log. intended for development purposes.
