@@ -11,11 +11,14 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.impl.status.StatusBarUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+
+import javax.swing.*;
 
 public class DashLauncherAction extends AnAction {
     private static final String XML_LANGUAGE_ID = "XML";
@@ -47,6 +50,9 @@ public class DashLauncherAction extends AnAction {
         Presentation presentation = this.getTemplatePresentation();
         presentation.setText("Search in " + docAppName);
         presentation.setDescription("Searches word under caret or selected text in " + docAppName);
+
+        Icon icon = IconLoader.getIcon("/" + docAppName.toLowerCase() + ".png", DashLauncherAction.class);
+        presentation.setIcon(icon);
     }
 
     @Override
@@ -62,6 +68,7 @@ public class DashLauncherAction extends AnAction {
             Presentation templatePresentation = getTemplatePresentation();
             presentation.setText(templatePresentation.getText());
             presentation.setDescription(templatePresentation.getDescription());
+            presentation.setIcon(templatePresentation.getIcon());
         }
 
         presentation.setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
