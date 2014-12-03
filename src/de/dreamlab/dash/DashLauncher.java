@@ -9,10 +9,14 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 
 import java.awt.Desktop;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DashLauncher {
 
@@ -22,32 +26,47 @@ public class DashLauncher {
     public void search(Collection<String> keywords, String query)
     {
         try {
-            String request = "dash-plugin://";
+            if ( System.getProperty("os.name").equals("Linux") ) {
+                List<String> command = Arrays.asList("zeal", "--query");
+                StringBuilder queryString = new StringBuilder();
+                if (keywords.size() > 0) {
+                    // Zeal only supports searches with one keyword. Until that
+                    // limitation is fixed, we can only search for the first keyword.
+                    String keyword = keywords.iterator().next();
+                    queryString.append(keyword);
+                    queryString.append(":");
+                }
+                queryString.append(query);
+                ProcessBuilder pb = new ProcessBuilder("zeal", "--query", queryString.toString());
+                pb.start();
+            } else {
+                String request = "dash-plugin://";
 
-            // keywords
-            if (keywords.size() > 0) {
-                request += "keys=";
-                int i = 0;
+                // keywords
+                if (keywords.size() > 0) {
+                    request += "keys=";
+                    int i = 0;
 
-                for (String keyword : keywords) {
-                    if (i > 0) {
-                        request += ',';
+                    for (String keyword : keywords) {
+                        if (i > 0) {
+                            request += ',';
+                        }
+
+                        request += urlEncode(keyword);
+
+                        i++;
                     }
 
-                    request += urlEncode(keyword);
-
-                    i++;
+                    request += "&";
                 }
 
-                request += "&";
+                // query
+                request += "query=" + urlEncode(query);
+
+                openUri(request);
             }
-
-            // query
-            request += "query=" + urlEncode(query);
-
-            openUri(request);
         }
-        catch ( UnsupportedEncodingException e ) {
+        catch ( IOException e ) {
             Notifications.Bus.notify(new Notification("Dash Plugin Error", "Dash Plugin Error", e.getMessage(), NotificationType.ERROR));
             return;
         }
