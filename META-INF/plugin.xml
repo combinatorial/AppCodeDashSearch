@@ -1,31 +1,40 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.1</version>
+  <version>3.2</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
-<p>A smart and simple plugin that provides keyboard shortcut access for Dash in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.</p>
+<p>A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.</p>
 <p>&nbsp;</p>
 <p><a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
 
-<p><h3><b>Usage</b></h3></p>
-<p>The default shortcut assigned in the plugin is <b>Cmd-Shift-D</b>.</p>
-<p>It either uses the caret position for the search, or the current selection. The plugin will identify the currently used programming language and request filtered search results accordingly.</p>
+<p><h2><b>Usage</b></h2></p>
+<p>The default <b>shortcut</b> assigned to search is <b>Cmd-Shift-D</b> (Mac OS X) or <b>Ctrl-Shift-D</b> (Windows, Linux).</p>
+<p>A <b>menubar command</b> named either "<b>Search in Dash</b>" (Mac OS X), "Search in Velocity" (Windows) or "Search in Zeal" (Linux) can be found in the "Tools" menu.</p>
+<p>The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly.</p>
 
-<p><h3><b>Kapeli Dash App</b></h3></p>
-<p>Dash is a Mac application for rapid search of developer documentation. There is a free, fully functional version with nags. It can be downloaded <a href="http://kapeli.com/dash">here</a>.</p>
+<p><h2><b>Configuration</b></h2></p>
+<h3><b>Shortcut</b></h3>
+<p>You can change the shortcut at Preferences -&gt; Keymap -&gt; Plug-ins -&gt; Dash.</p>
+<h3><b>Toolbar Icon</b></h3>
+<p>You can add a "Search in Dash/Velocity/Zeal" button to the toolbar. Right-click the menubar -&gt; Customize […]. You will find the button under "Plug-ins -&gt; Dash".</p>
 
-<p><h3><b>What's new</b></h3></p>
-<p style="margin-bottom:10px">In the past months I have been adding and testing new features for the plugin. I am now happy to release a lot of these additions that will make your search results just better.</p>
-<p style="margin-bottom:10px">From now on code in strings will be recognized. This way it is no longer necessary to select a specific word, the plugin will automatically know what you want to look up by the caret position. A lot of strings contain SQL code and for these your results will only be from a SQL docset. In Project Settings -> SQL Dialects you can set which SQL docset you want to search. There are docsets available for MySQL, PostgreSQL and SQLite.</p>
-<p style="margin-bottom:10px">If you have the "Regular Expressions" cheatsheet installed in Dash you can lookup groups, quantifiers and special characters really quickly. Just try and check what /\v/ stands for.</p>
-<p style="margin-bottom:10px">Android projects get results from the Android docs, not Java. Java results depend on the projects SDK setting, searching either Java 6, 7 or 8. The same goes for Python 2 or 3. Apart from that I added support for Bash, Go, Haskell, Lua, Markdown, Scala and TypoScript. Language support for JavaScript and others has been enhanced.</p>
-<p style="margin-bottom:10px">Simplicity is really important to me, that's why I always try to keep the plugin smart, simple and settings free. I hope this helps you spend less time searching the reference. Make the best of it.</p>
+<p><h2><b>Supported API Documentation Browsers</b></h2></p>
+<h3><b>Kapeli Dash (Mac OS X)</b></h3>
+<p>Dash is an API Documentation Browser and Code Snippet Manager. Dash stores snippets of code and instantly searches offline documentation sets for 150+ APIs (for a full list, see below). You can even generate your own docsets or request docsets to be included. <a href="http://kapeli.com/dash">http://kapeli.com/dash</a></p>
+<h3><b>Velocity (Windows)</b></h3>
+<p>Velocity gives your Windows desktop offline access to over 150 API documentation sets (provided by Dash for OS X). <a href="https://velocity.silverlakesoftware.com">https://velocity.silverlakesoftware.com</a></p>
+<h3><b>Zeal (Linux)</b></h3>
+<p>Zeal is a simple offline API documentation browser inspired by Dash (OS X app). <a href="http://zealdocs.org">http://zealdocs.org</a></p>
 ]]></description>
 
   <change-notes><![CDATA[
 <pre>
+3.2
+    - Toolbar icon support
+    - Velocity support on Windows
+    - Zeal support on Linux
 3.1
     - language detection support in strings
     - project settings sql dialect will be used
