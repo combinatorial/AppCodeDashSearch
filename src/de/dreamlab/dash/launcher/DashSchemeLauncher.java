@@ -28,7 +28,7 @@ public class DashSchemeLauncher extends AbstractLauncher {
 
             // keywords
             if ( keywords.size() > 0 ) {
-                request += "keys=" + urlEncode(keywordString(keywords)) + "&";
+                request += "keys=" + keywordString(keywords) + "&";
             }
 
             // query
