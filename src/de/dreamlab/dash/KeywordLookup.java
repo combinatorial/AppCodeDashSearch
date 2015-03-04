@@ -82,6 +82,7 @@ public class KeywordLookup {
         setLanguage("Google Go", "go", "godoc");
         setLanguage("Lua", "lua", "corona");
         setLanguage("Markdown", "markdown");
+        setLanguage("Clojure", "clojure");
 
 
         /*
