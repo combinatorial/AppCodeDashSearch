@@ -8,11 +8,14 @@ public abstract class AbstractLauncher {
 
     public static AbstractLauncher createInstance()
     {
-        if ( SystemUtil.isIsOSLinux() ) {
+        if ( SystemUtil.isIsOSMac() ) {
+            return new DashLauncher();
+        }
+        else if ( SystemUtil.isIsOSLinux() ) {
             return new ZealLauncher();
         }
         else {
-            return new DashSchemeLauncher();
+            return new DashPluginSchemeLauncher();
         }
     }
 

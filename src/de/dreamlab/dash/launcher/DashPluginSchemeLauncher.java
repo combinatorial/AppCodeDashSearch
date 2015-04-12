@@ -16,9 +16,9 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class DashSchemeLauncher extends AbstractLauncher {
+public class DashPluginSchemeLauncher extends AbstractLauncher {
 
-    public DashSchemeLauncher() {
+    public DashPluginSchemeLauncher() {
     }
 
     public void search(List<String> keywords, String query)
