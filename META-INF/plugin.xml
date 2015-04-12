@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.2.2</version>
+  <version>3.2.3</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -31,6 +31,9 @@
 
   <change-notes><![CDATA[
 <pre>
+3.2.3
+    - Dash 2.3 Remote redirection support
+    - Clojure support
 3.2.2 ActionScript support
 3.2.1 Fixed an issue where
       context filters would not work
