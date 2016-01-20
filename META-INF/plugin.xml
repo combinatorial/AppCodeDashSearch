@@ -1,13 +1,13 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.2.3</version>
+  <version>3.2.4</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
 <p>A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.</p>
 <p>&nbsp;</p>
-<p><a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
+<p><a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank">Flattr this!</a></p>
 
 <p><h2><b>Usage</b></h2></p>
 <p>The default <b>shortcut</b> assigned to search is <b>Cmd-Shift-D</b> (Mac OS X) or <b>Ctrl-Shift-D</b> (Windows, Linux).</p>
@@ -31,6 +31,8 @@
 
   <change-notes><![CDATA[
 <pre>
+3.2.4
+    - Dockerfile support
 3.2.3
     - Dash 2.3 Remote redirection support
     - Clojure support
