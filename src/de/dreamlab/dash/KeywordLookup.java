@@ -76,7 +76,7 @@ public class KeywordLookup {
         setLanguage("Scala", "scala", "akka", "playscala");
         setLanguage("SSP", "scala", "akka", "playscala");
         setLanguage("TypoScript", "typo3");
-        setLanguage("Dockerfile", "docker");
+        setLanguage("Dockerfile", "docker", "bash", "manpages");
 
         // Third-party Plugins
         setLanguage("Bash", "bash", "manpages");
