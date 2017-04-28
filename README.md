@@ -36,8 +36,8 @@ Zeal is a simple offline API documentation browser inspired by Dash (OS X app).
 
 
 ## Troubleshooting
-######The plugin does not work on old IDEs
+###### The plugin does not work on old IDEs
 Older IDE versions like **AppCode 1.x** are not supported anymore. Please manually install version 2.2 of the plugin: https://github.com/gdelmas/IntelliJDashPlugin/releases/tag/2.2
 
-######In rare conditions the installation from the repositories does not work
+###### In rare conditions the installation from the repositories does not work
 It looks like there is an IntelliJ/Java bug with OS X Mavericks which prevents to install plugins from the repositories. Please install the plugin manually from [here](https://github.com/gdelmas/IntelliJDashPlugin/releases). For additional information check [issue #13](https://github.com/gdelmas/IntelliJDashPlugin/issues/13).
