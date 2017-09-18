@@ -61,7 +61,7 @@ public class KeywordLookup {
         setLanguage("PHP", "php", "wordpress", "drupal", "zend", "laravel", "yii", "joomla", "ee", "codeigniter", "cakephp", "phpunit", "symfony", "typo3", "twig", "smarty", "phpp"); // PhpStorm
         setLanguage("Play", "playjava"); // IntelliJ; uncertain
         setLanguage("Puppet", "puppet"); // RubyMine, PyCharm
-        setLanguage("Python", new PythonSdkVersionDependentKeyword("python2", "python3"), "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp"); // PyCharm
+        setLanguage("Python", new PythonSdkVersionDependentKeyword("python2", "python3"), "python", "django", "twisted", "sphinx", "flask", "tornado", "sqlalchemy", "numpy", "scipy", "salt", "cvp", "matplotlib"); // PyCharm
         setLanguage("ruby", "ruby", "rubygems", "rails"); // RubyMine
         setLanguage("Smarty", "smarty"); // PhpStorm
         setLanguage("SmartyConfig", "smarty"); // PhpStorm
