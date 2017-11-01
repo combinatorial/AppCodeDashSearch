@@ -6,8 +6,6 @@
 
   <description><![CDATA[
 <p>A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.</p>
-<p>&nbsp;</p>
-<p><a href="http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub" target="_blank">Flattr this!</a></p>
 
 <p><h2><b>Usage</b></h2></p>
 <p>The default <b>shortcut</b> assigned to search is <b>Cmd-Shift-D</b> (Mac OS X) or <b>Ctrl-Shift-D</b> (Windows, Linux).</p>

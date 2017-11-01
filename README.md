@@ -1,7 +1,5 @@
 A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.
 
-[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/2558535/gdelmasIntelliJDashPlugin-on-GitHub)
-
 ## Installation
 To install the plugin in your IDE go to **Preferences -> Plugins -> Browse repositories** and **search for "Dash"**.
 
