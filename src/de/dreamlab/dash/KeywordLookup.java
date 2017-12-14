@@ -85,6 +85,7 @@ public class KeywordLookup {
         setLanguage("Lua", "lua", "corona");
         setLanguage("Markdown", "markdown");
         setLanguage("Clojure", "clojure");
+        setLanguage("Elixir", "elixir");
 
 
         /*
