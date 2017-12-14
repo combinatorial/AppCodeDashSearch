@@ -66,6 +66,7 @@ public class KeywordLookup {
         setLanguage("Smarty", "smarty"); // PhpStorm
         setLanguage("SmartyConfig", "smarty"); // PhpStorm
         setLanguage("Twig", "twig"); // PhpStorm
+        setLanguage("go", "go", "godoc"); // GoLand
 
         // SQL
         setLanguage("SQL", new SqlDialectDependentKeyword("mysql", "mysql", "sqlite", "psql"));
