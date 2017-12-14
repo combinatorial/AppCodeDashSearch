@@ -37,23 +37,17 @@ public class DashLauncherAction extends AnAction {
 
     private void initPresentation()
     {
-        String docAppName;
+        String docAppName = "";
 
-        if ( SystemUtil.isIsOSWindows() ) {
-            docAppName = "Velocity";
-        }
-        else if ( SystemUtil.isIsOSLinux() ) {
-            docAppName = "Zeal";
-        }
-        else {
-            docAppName = "Dash";
+        if ( SystemUtil.isIsOSMac() ) {
+            docAppName = " in Dash";
         }
 
         Presentation presentation = this.getTemplatePresentation();
-        presentation.setText("Search in " + docAppName);
-        presentation.setDescription("Searches word under caret or selected text in " + docAppName);
+        presentation.setText("Search Documentation" + docAppName);
+        presentation.setDescription("Searches documentation for word under caret or selected text" + docAppName);
 
-        Icon icon = IconLoader.getIcon("/" + docAppName.toLowerCase() + ".png", DashLauncherAction.class);
+        Icon icon = IconLoader.getIcon("/dash.png", DashLauncherAction.class);
         presentation.setIcon(icon);
     }
 
