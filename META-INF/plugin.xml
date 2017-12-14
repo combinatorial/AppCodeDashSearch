@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.2.4</version>
+  <version>3.2.5</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -29,6 +29,9 @@
 
   <change-notes><![CDATA[
 <pre>
+3.2.5
+    - Fixed Zeal Support
+    - Go, Elixir & Erlang support
 3.2.4
     - Dockerfile support
 3.2.3
