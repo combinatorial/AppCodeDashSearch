@@ -11,9 +11,6 @@ public abstract class AbstractLauncher {
         if ( SystemUtil.isIsOSMac() ) {
             return new DashLauncher();
         }
-        else if ( SystemUtil.isIsOSLinux() ) {
-            return new ZealLauncher();
-        }
         else {
             return new DashPluginSchemeLauncher();
         }
