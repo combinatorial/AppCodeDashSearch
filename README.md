@@ -1,4 +1,4 @@
-A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm and Android Studio.
+A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, DataGrip, CLion, GoLand and Android Studio.
 
 ## Installation
 To install the plugin in your IDE go to **Preferences -> Plugins -> Browse repositories** and **search for "Dash"**.
@@ -7,7 +7,7 @@ To install the plugin in your IDE go to **Preferences -> Plugins -> Browse repos
 The default **shortcut** assigned to search is **Cmd-Shift-D** (Mac OS X) or **Ctrl-Shift-D** (Windows, Linux). 
 
 
-A **menubar command** named either "**Search in Dash**" (Mac OS X), "Search in Velocity" (Windows) or "Search in Zeal" (Linux) can be found in the "Tools" menu.
+A **menubar command** named "**Search Documentation**" can be found in the "Tools" menu.
 
 
 The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly.
@@ -17,7 +17,7 @@ The plugin either searches for the statement at caret position or the current se
 You can change the shortcut at Preferences -> Keymap -> Plug-ins -> Dash.
 
 ### Toolbar Icon
-You can add a "Search in Dash/Velocity/Zeal" button to the toolbar. Right-click the menubar -> Customize […]. You will find the button under "Plug-ins -> Dash".
+You can add a "Search Documentation" button to the toolbar. Right-click the menubar -> Customize […]. You will find the button under "Plug-ins -> Dash".
 
 ## Supported API Documentation Browsers
 ### Kapeli Dash (Mac OS X)
@@ -28,7 +28,7 @@ Dash is an API Documentation Browser and Code Snippet Manager. Dash stores snipp
 Velocity gives your Windows desktop offline access to over 150 API documentation sets (provided by Dash for OS X).
 [https://velocity.silverlakesoftware.com](https://velocity.silverlakesoftware.com)
 
-### Zeal (Linux)
+### Zeal (Linux & Windows)
 Zeal is a simple offline API documentation browser inspired by Dash (OS X app).
 [http://zealdocs.org](http://zealdocs.org)
 
