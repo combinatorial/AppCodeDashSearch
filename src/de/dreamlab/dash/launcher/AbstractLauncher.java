@@ -17,27 +17,4 @@ public abstract class AbstractLauncher {
     }
 
     public abstract void search(List<String> keywords, String query);
-
-    protected String keywordString(final List<String> keywords) throws Exception
-    {
-        if ( keywords.size() > 0 ) {
-            String result = "";
-            boolean first = true;
-
-            for (String keyword : keywords) {
-                if ( !first ) {
-                    result += ',';
-                }
-
-                result += keyword;
-
-                first = false;
-            }
-
-            return result;
-        }
-        else {
-            throw new Exception("empty keyword list");
-        }
-    }
 }

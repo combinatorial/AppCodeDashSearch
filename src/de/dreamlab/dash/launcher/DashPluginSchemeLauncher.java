@@ -28,7 +28,7 @@ public class DashPluginSchemeLauncher extends AbstractLauncher {
 
             // keywords
             if ( keywords.size() > 0 ) {
-                request += "keys=" + keywordString(keywords) + "&";
+                request += "keys=" + String.join(",", keywords) + "&";
             }
 
             // query
