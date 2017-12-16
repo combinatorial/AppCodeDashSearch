@@ -1,55 +1,21 @@
 package de.dreamlab.dash;
 
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 
-import javax.swing.*;
-
-public class SmartSearchAction extends AnAction {
-    private boolean isPresentationInitialized = false;
+public class SmartSearchAction extends AbstractMenuAction {
 
     public SmartSearchAction()
     {
-    }
-
-    private void initPresentation()
-    {
-        String docAppName = "";
-
-        if ( SystemUtil.isIsOSMac() ) {
-            docAppName = " in Dash";
-        }
-
-        Presentation presentation = this.getTemplatePresentation();
-        presentation.setText("Search Documentation" + docAppName);
-        presentation.setDescription("Searches documentation for word under caret or selected text" + docAppName);
-
-        Icon icon = IconLoader.getIcon("/dash.png", SmartSearchAction.class);
-        presentation.setIcon(icon);
-    }
-
-    @Override
-    public void update(AnActionEvent e) {
-        super.update(e);
-
-        Presentation presentation = e.getPresentation();
-
-        if ( !isPresentationInitialized ) {
-            isPresentationInitialized = true;
-            initPresentation();
-
-            Presentation templatePresentation = getTemplatePresentation();
-            presentation.setText(templatePresentation.getText());
-            presentation.setDescription(templatePresentation.getDescription());
-            presentation.setIcon(templatePresentation.getIcon());
-        }
-
-        presentation.setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
+        title = "Smart Search Documentation";
+        description = "Searches word under caret or selection in documentation filtered by currently used language";
+        iconFilename = "dash.png";
     }
 
     public void actionPerformed(AnActionEvent e) {

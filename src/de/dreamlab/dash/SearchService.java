@@ -18,6 +18,7 @@ import de.dreamlab.dash.launcher.AbstractLauncher;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class SearchService {
     // singleton
@@ -74,6 +75,19 @@ public class SearchService {
         }
 
         return psiElement.getText();
+    }
+
+    public void search(@Nonnull Editor editor, @Nullable Project project, @Nullable PsiFile psiFile)
+    {
+        PsiElement psiElement = getPsiElementAtCursor(editor, project, psiFile);
+        String query = getSearchQueryFromEditor(editor, psiElement);
+
+        if ( query == null ) {
+            return;
+        }
+
+        // open dash
+        launcher.search(new ArrayList<>(), query);
     }
 
     public void smartSearch(@Nonnull Editor editor, @Nullable Project project, @Nullable PsiFile psiFile, @Nullable VirtualFile virtualFile)

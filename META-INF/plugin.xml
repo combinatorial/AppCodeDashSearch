@@ -87,10 +87,15 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="DashLauncherAction" class="de.dreamlab.dash.SmartSearchAction" text="Search in Dash" description="Searches word under caret or selected text in Dash">
+      <action id="SmartSearchAction" class="de.dreamlab.dash.SmartSearchAction" text="Smart Search Documentation" description="Searches word under caret or selection in documentation filtered by currently used language">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
       </action>
+
+    <action id="SearchAction" class="de.dreamlab.dash.SearchAction" text="Search all Documentation" description="Searches word under caret or selection in documentation">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift D"/>
+    </action>
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
