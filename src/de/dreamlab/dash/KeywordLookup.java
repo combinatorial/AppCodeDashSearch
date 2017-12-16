@@ -41,7 +41,7 @@ public class KeywordLookup {
         setLanguage("SQLite", "sqlite"); // not WebStorm
 
         // Products listed for each entry
-        final IKeyword javaVersionedKeyword = new JavaSdkVersionDependentKeyword("java6", "java7", "java8");
+        final IKeyword javaVersionedKeyword = new JavaSdkVersionDependentKeyword("java6", "java7", "java8", "java9");
         final IKeyword javaKeyword = new SdkTypeSpecificKeyword("java", "Android SDK", "android");
         final IKeyword javaFxKeyword = new ExcludeSdkTypeKeyword("javafx", "Android SDK");
         final IKeyword grailsKeyword = new ExcludeSdkTypeKeyword("grails", "Android SDK");

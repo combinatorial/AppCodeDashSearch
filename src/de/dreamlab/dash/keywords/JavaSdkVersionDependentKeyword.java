@@ -7,11 +7,13 @@ public class JavaSdkVersionDependentKeyword extends AbstractSdkKeyword implement
     private String java6Keyword;
     private String java7Keyword;
     private String java8Keyword;
+    private String java9Keyword;
 
-    public JavaSdkVersionDependentKeyword(String java6Keyword, String java7Keyword, String java8Keyword) {
+    public JavaSdkVersionDependentKeyword(String java6Keyword, String java7Keyword, String java8Keyword, String java9Keyword) {
         this.java6Keyword = java6Keyword;
         this.java7Keyword = java7Keyword;
         this.java8Keyword = java8Keyword;
+        this.java9Keyword = java9Keyword;
     }
 
     @Override
@@ -30,6 +32,9 @@ public class JavaSdkVersionDependentKeyword extends AbstractSdkKeyword implement
                 }
                 else if ( versionString.contains("1.8.") ) {
                     return java8Keyword;
+                }
+                else if ( versionString.contains("1.9.") ) {
+                    return java9Keyword;
                 }
             }
         }
