@@ -13,7 +13,7 @@ public class SmartSearchAction extends AbstractMenuAction {
 
     public SmartSearchAction()
     {
-        title = "Smart Search Documentation";
+        title = "Smart-Search Documentation";
         description = "Searches word under caret or selection in documentation filtered by currently used language";
         iconFilename = "dash.png";
     }

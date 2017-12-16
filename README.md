@@ -4,20 +4,20 @@ A smart and simple plugin that provides keyboard shortcut access for Dash, Veloc
 To install the plugin in your IDE go to **Preferences -> Plugins -> Browse repositories** and **search for "Dash"**.
 
 ## Usage
-The default **shortcut** assigned to search is **Cmd-Shift-D** (Mac OS X) or **Ctrl-Shift-D** (Windows, Linux). 
+The default **shortcut** assigned to smart-search is **Cmd-Shift-D** (Mac OS X) or **Ctrl-Shift-D** (Windows, Linux).
 
 
-A **menubar command** named "**Search Documentation**" can be found in the "Tools" menu.
+A **menubar command** named "**Smart-Search Documentation**" can be found in the "Tools" menu.
 
 
-The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly.
+The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly. A non filtered search over all documentation entries can be invoked by adding the **Alt** modifier key to the shortcut. "**Search all Documentation**" is also available in the tools menu. 
 
 ## Configuration
 ### Shortcut
 You can change the shortcut at Preferences -> Keymap -> Plug-ins -> Dash.
 
 ### Toolbar Icon
-You can add a "Search Documentation" button to the toolbar. Right-click the menubar -> Customize […]. You will find the button under "Plug-ins -> Dash".
+You can add a button to the toolbar. Right-click the menubar -> Customize […]. You will find the button under "Plug-ins -> Dash".
 
 ## Supported API Documentation Browsers
 ### Kapeli Dash (Mac OS X)

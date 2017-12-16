@@ -8,15 +8,15 @@
 <p>A smart and simple plugin that provides keyboard shortcut access for Dash, Velocity or Zeal in IntelliJ IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, DataGrip, CLion, GoLand and Android Studio.</p>
 
 <p><h2><b>Usage</b></h2></p>
-<p>The default <b>shortcut</b> assigned to search is <b>Cmd-Shift-D</b> (Mac OS X) or <b>Ctrl-Shift-D</b> (Windows, Linux).</p>
-<p>A <b>menubar command</b> named either "<b>Search Documentation</b>" can be found in the "Tools" menu.</p>
-<p>The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly.</p>
+<p>The default <b>shortcut</b> assigned to smart-search is <b>Cmd-Shift-D</b> (Mac OS X) or <b>Ctrl-Shift-D</b> (Windows, Linux).</p>
+<p>A <b>menubar command</b> named either "<b>Smart-Search Documentation</b>" can be found in the "Tools" menu.</p>
+<p>The plugin either searches for the statement at caret position or the current selection. It will identify the programming language in use and request filtered results accordingly. A non filtered search over all documentation entries can be invoked by adding the <b>Alt</b> modifier key to the shortcut. "<b>Search all Documentation</b>" is also available in the tools menu.
 
 <p><h2><b>Configuration</b></h2></p>
 <h3><b>Shortcut</b></h3>
 <p>You can change the shortcut at Preferences -&gt; Keymap -&gt; Plug-ins -&gt; Dash.</p>
 <h3><b>Toolbar Icon</b></h3>
-<p>You can add a "Search Documentation" button to the toolbar. Right-click the menubar -&gt; Customize […]. You will find the button under "Plug-ins -&gt; Dash".</p>
+<p>You can add a button to the toolbar. Right-click the menubar -&gt; Customize […]. You will find the button under "Plug-ins -&gt; Dash".</p>
 
 <p><h2><b>Supported API Documentation Browsers</b></h2></p>
 <h3><b>Kapeli Dash (Mac OS X)</b></h3>
@@ -87,7 +87,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="SmartSearchAction" class="de.dreamlab.dash.SmartSearchAction" text="Smart Search Documentation" description="Searches word under caret or selection in documentation filtered by currently used language">
+      <action id="SmartSearchAction" class="de.dreamlab.dash.SmartSearchAction" text="Smart-Search Documentation" description="Searches word under caret or selection in documentation filtered by currently used language">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
       </action>
