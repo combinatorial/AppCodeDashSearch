@@ -87,7 +87,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="DashLauncherAction" class="de.dreamlab.dash.DashLauncherAction" text="Search in Dash" description="Searches word under caret or selected text in Dash">
+      <action id="DashLauncherAction" class="de.dreamlab.dash.SmartSearchAction" text="Search in Dash" description="Searches word under caret or selected text in Dash">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
       </action>
