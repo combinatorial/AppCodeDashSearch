@@ -87,6 +87,7 @@ public class SearchService {
         }
 
         // open dash
+        showStatusMessage(project, null, null);
         launcher.search(new ArrayList<>(), query);
     }
 
@@ -106,32 +107,37 @@ public class SearchService {
             return;
         }
 
-
-        // show status message for potential troubleshooting
-        final StringBuilder messageBuilder = new StringBuilder();
-
-        if ( resolvedLanguage == null ) {
-            messageBuilder.append("Searching all docsets in Dash");
-        }
-        else {
-            messageBuilder.append(String.format("Searching \"%s\" docsets in Dash", resolvedLanguage));
-        }
-
-        if ( language != null && !language.getID().equals(resolvedLanguage) ) {
-            messageBuilder.append(String.format(". Based on \"%s\" context.", language.getID()));
-        }
-
-        if ( project != null ) {
-            StatusBarUtil.setStatusBarInfo(project, messageBuilder.toString());
-        }
-
         // open dash
+        showStatusMessage(project, resolvedLanguage, language);
         launcher.search(keywordLookup.findKeywords(new LookupInfoDictionary(language, psiElement, project, psiFile, virtualFile)), query);
 
         /*
         use the following command to display information about the sdk in use in the event log. intended for development purposes.
         showSdkDebug(AbstractSdkKeyword.findSdk(psiElement, project, psiFile, virtualFile));
         */
+    }
+
+    private void showStatusMessage(final @Nullable Project project, final @Nullable String resolvedLanguage, final @Nullable Language language)
+    {
+        if ( project == null ) {
+            return;
+        }
+
+        // show status message for potential troubleshooting
+        final StringBuilder messageBuilder = new StringBuilder();
+
+        if ( resolvedLanguage == null ) {
+            messageBuilder.append("Searching all documentation");
+        }
+        else {
+            messageBuilder.append(String.format("Smart-Searching \"%s\" documentation", resolvedLanguage));
+        }
+
+        if ( language != null && !language.getID().equals(resolvedLanguage) ) {
+            messageBuilder.append(String.format(". Based on \"%s\" context.", language.getID()));
+        }
+
+        StatusBarUtil.setStatusBarInfo(project, messageBuilder.toString());
     }
 
     private void showSdkDebug(@Nullable Sdk sdk)
