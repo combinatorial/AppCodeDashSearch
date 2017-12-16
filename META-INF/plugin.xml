@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.paperetto.dash</id>
   <name>Dash</name>
-  <version>3.2.5</version>
+  <version>3.3</version>
   <vendor url="https://github.com/gdelmas/IntelliJDashPlugin">Gerard Delmàs</vendor>
 
   <description><![CDATA[
@@ -29,6 +29,9 @@
 
   <change-notes><![CDATA[
 <pre>
+3.3
+    - Added non-smart "Search all Documentation" option
+    - Java 9 SDK detection
 3.2.5
     - Fixed Zeal Support
     - Go, Elixir & Erlang support
