@@ -34,6 +34,9 @@ Zeal is a simple offline API documentation browser inspired by Dash (OS X app).
 
 
 ## Troubleshooting
+###### On Windows, when using Zeal the IDE shows `Failed to open dash-plugin://...` in the Event Log
+It looks like the URL handler has not been registered for Zeal. Please run `zeal.exe --register`.
+
 ###### The plugin does not work on old IDEs
 Older IDE versions like **AppCode 1.x** are not supported anymore. Please manually install version 2.2 of the plugin: https://github.com/gdelmas/IntelliJDashPlugin/releases/tag/2.2
 
