@@ -49,7 +49,7 @@ public class KeywordLookup {
         final IKeyword playjavaKeyword = new ExcludeSdkTypeKeyword("playjava", "Android SDK");
         final IKeyword springKeyword = new ExcludeSdkTypeKeyword("spring", "Android SDK");
 
-        setLanguage("Dart", "dartlang", "polymerdart", "angulardart"); // WebStorm
+        setLanguage("Dart", "dartlang", "dartdocs", "polymerdart", "angulardart"); // WebStorm
         setLanguage("DjangoTemplate", "django"); // PyCharm
         setLanguage("Groovy", "groovy"); // IntelliJ
         setLanguage("Jade", "jade"); // WebStorm
